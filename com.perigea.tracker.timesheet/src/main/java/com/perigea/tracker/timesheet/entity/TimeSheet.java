@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelationshipIdTimeSheetEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetEntity;
 
 @Entity
-@IdClass(RelationshipIdTimeSheetEntity.class)
+@IdClass(RelazioneIdTimeSheetEntity.class)
 @Table(name = "time_sheet")
-public class TimeSheetEntity implements Serializable {
+public class TimeSheet implements Serializable {
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class TimeSheetEntity implements Serializable {
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona", nullable = false)
-	private UtenteEntity utenteTime;
+	private Utente utenteTimeSheet;
 
 	@Id
 	@Column(name="codice_commessa")
@@ -48,7 +48,7 @@ public class TimeSheetEntity implements Serializable {
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
-	private CommessaEntity commessaTime;
+	private Commessa commessaTimeSheet;
 
 	@Id
 	@Column(name = "giorno_di_riferimento")
@@ -93,20 +93,20 @@ public class TimeSheetEntity implements Serializable {
 		this.meseDiRiferimento = meseDiRiferimento;
 	}
 
-	public UtenteEntity getUtenteTime() {
-		return utenteTime;
+	public Utente getUtenteTime() {
+		return utenteTimeSheet;
 	}
 
-	public void setUtenteTime(UtenteEntity utenteTime) {
-		this.utenteTime = utenteTime;
+	public void setUtenteTime(Utente utenteTime) {
+		this.utenteTimeSheet = utenteTime;
 	}
 
-	public CommessaEntity getCommessaTime() {
-		return commessaTime;
+	public Commessa getCommessaTimeSheet() {
+		return commessaTimeSheet;
 	}
 
-	public void setCommessaTime(CommessaEntity commessaTime) {
-		this.commessaTime = commessaTime;
+	public void setCommessaTimeSheed(Commessa commessaTimeSheet) {
+		this.commessaTimeSheet = commessaTimeSheet;
 	}
 
 	public Integer getGiornoDiRiferimento() {

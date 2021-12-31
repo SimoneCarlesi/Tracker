@@ -15,7 +15,7 @@ import com.perigea.tracker.timesheet.enumerator.TipologiaPagamentoType;
 
 @Entity
 @Table(name = "anagrafica_cliente")
-public class AnagraficaClienteEntity {
+public class AnagraficaCliente {
 
 	@Id
 	@Column(name = "ragione_sociale_cliente")
@@ -73,10 +73,10 @@ public class AnagraficaClienteEntity {
 	private String lastUpdateUser;
 
 	@OneToMany(mappedBy = "ragioneSociale", cascade = CascadeType.ALL)
-	private List<CommessaFatturabileEntity> commessaFat = new ArrayList<>();
+	private List<CommessaFatturabile> commessaFat = new ArrayList<>();
 
 	@OneToMany(mappedBy = "ragioneSocialeCliente", cascade = CascadeType.ALL)
-	private List<OrdineCommessaEntity> ordineComm = new ArrayList<>();
+	private List<OrdineCommessa> ordineComm = new ArrayList<>();
 
 	public String getRagioneSocialeCliente() {
 		return ragioneSocialeCliente;
@@ -222,19 +222,19 @@ public class AnagraficaClienteEntity {
 		this.lastUpdateUser = lastUpdateUser;
 	}
 
-	public List<CommessaFatturabileEntity> getCommessaFat() {
+	public List<CommessaFatturabile> getCommessaFat() {
 		return commessaFat;
 	}
 
-	public void setCommessaFat(List<CommessaFatturabileEntity> commessaFat) {
+	public void setCommessaFat(List<CommessaFatturabile> commessaFat) {
 		this.commessaFat = commessaFat;
 	}
 
-	public List<OrdineCommessaEntity> getOrdineComm() {
+	public List<OrdineCommessa> getOrdineComm() {
 		return ordineComm;
 	}
 
-	public void setOrdineComm(List<OrdineCommessaEntity> ordineComm) {
+	public void setOrdineComm(List<OrdineCommessa> ordineComm) {
 		this.ordineComm = ordineComm;
 	}
 	 

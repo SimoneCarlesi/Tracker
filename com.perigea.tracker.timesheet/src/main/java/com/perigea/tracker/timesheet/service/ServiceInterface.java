@@ -1,7 +1,5 @@
 package com.perigea.tracker.timesheet.service;
 
-import java.util.List;
-
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
@@ -9,28 +7,30 @@ import com.perigea.tracker.timesheet.dto.RelazioneDipendenteCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
+import com.perigea.tracker.timesheet.entity.Ruoli;
+import com.perigea.tracker.timesheet.entity.Utente;
 
 public interface ServiceInterface {
 	
-	public void login(String psw, String createUser);
+	public void login(String key, String username);
 	
 	public void createUser(UtenteDto userParam, String key);
 	
-	public void readUser(UtenteDto userParam, String key);
+	public Utente readUser(String id, String key);
 	
-	public void updateUser(UtenteDto userParam, String key);
+	public Utente updateUser(UtenteDto userParam, String key);
 	
-	public void deleteUser(String userParam, String key);
+	public void deleteUser(String id, String key);
 	
-	public void editStatusUser(UtenteDto userParam, String key);
+	public Utente editStatusUser(UtenteDto userParam, String key);
 	
 	public void createRole(RuoliDto role, String key);
 	
-	public void readRole(RuoliDto role, String key);
+	public Ruoli readRole(String role, String key);
 	
-	public void updateRole(RuoliDto role,String key);
+	public Ruoli updateRole(RuoliDto role,String key);
 	
-	public void deleteRole(RuoliDto role,String key);
+	public void deleteRole(String role,String key);
 	
 	public void roleAssignmentToUser(RuoliDto roleParam, UtenteDto userParam, String key);
 	

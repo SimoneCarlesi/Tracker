@@ -14,7 +14,7 @@ import com.perigea.tracker.timesheet.enumerator.RuoloType;
 
 @Entity
 @Table(name="ruoli")
-public class RuoliEntity {
+public class Ruoli {
 
 	@Id
 	@Column(name="ruolo")
@@ -22,14 +22,14 @@ public class RuoliEntity {
 	@Column(name="descrizione_ruolo")
 	private String descrizioneRuolo;
 	
-	@MapsId
-	@ManyToMany
-	@JoinTable(
-			name = "utente_ruolo",
-			joinColumns = @JoinColumn(name = "ruolo"),
-			inverseJoinColumns = @JoinColumn(name="codice_persona")
-			)
-	private List<UtenteEntity> utenti = new ArrayList();
+//	@MapsId
+//	@ManyToMany
+//	@JoinTable(
+//			name = "utente_ruolo",
+//			joinColumns = @JoinColumn(name = "ruolo"),
+//			inverseJoinColumns = @JoinColumn(name="codice_persona")
+//			)
+//	private List<Utente> utenti = new ArrayList<>();
 
 	public String getRuoloType() {
 		return ruoloType;
@@ -47,13 +47,13 @@ public class RuoliEntity {
 		this.descrizioneRuolo = descrizioneRuolo;
 	}
 
-	public List<UtenteEntity> getUtenti() {
-		return utenti;
-	}
-
-	public void setUtenti(List<UtenteEntity> utenti) {
-		this.utenti = utenti;
-	} 
+//	public List<Utente> getUtenti() {
+//		return utenti;
+//	}
+//
+//	public void setUtenti(List<Utente> utenti) {
+//		this.utenti = utenti;
+//	} 
 	
 	
 }

@@ -14,7 +14,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaFatturabileType;
 
 @Entity
 @Table(name = "commessa_fatturabile")
-public class CommessaFatturabileEntity {
+public class CommessaFatturabile {
 
 	@Id
 	@Column(name="codice_commessa")
@@ -23,11 +23,11 @@ public class CommessaFatturabileEntity {
 	@MapsId
 	@OneToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
-	private CommessaEntity commessaFat;
+	private Commessa commessaFatturabile;
 
 	@ManyToOne
 	@JoinColumn(name = "ragione_sociale_cliente", referencedColumnName = "ragione_sociale_cliente", nullable = false)
-	private AnagraficaClienteEntity ragioneSociale;
+	private AnagraficaCliente ragioneSociale;
 
 	@Column(name = "descrizione_commessa_perigea")
 	private String descrizioneCommessaPerigea;
@@ -99,21 +99,21 @@ public class CommessaFatturabileEntity {
 	private String responsabileCommerciale;
 
 	@OneToOne(mappedBy = "commessaFatturabile")
-	private OrdineCommessaEntity ordineCommessa;
+	private OrdineCommessa ordineCommessa;
 
-	public CommessaEntity getCommessaFat() {
-		return commessaFat;
+	public Commessa getCommessaFat() {
+		return commessaFatturabile;
 	}
 
-	public void setCommessaFat(CommessaEntity commessaFat) {
-		this.commessaFat = commessaFat;
+	public void setCommessaFat(Commessa commessaFat) {
+		this.commessaFatturabile = commessaFat;
 	}
 
-	public AnagraficaClienteEntity getRagioneSociale() {
+	public AnagraficaCliente getRagioneSociale() {
 		return ragioneSociale;
 	}
 
-	public void setRagioneSociale(AnagraficaClienteEntity ragioneSociale) {
+	public void setRagioneSociale(AnagraficaCliente ragioneSociale) {
 		this.ragioneSociale = ragioneSociale;
 	}
 
@@ -301,11 +301,11 @@ public class CommessaFatturabileEntity {
 		this.responsabileCommerciale = responsabileCommerciale;
 	}
 
-	public OrdineCommessaEntity getOrdineCommessa() {
+	public OrdineCommessa getOrdineCommessa() {
 		return ordineCommessa;
 	}
 
-	public void setOrdineCommessa(OrdineCommessaEntity ordineCommessa) {
+	public void setOrdineCommessa(OrdineCommessa ordineCommessa) {
 		this.ordineCommessa = ordineCommessa;
 	}
 

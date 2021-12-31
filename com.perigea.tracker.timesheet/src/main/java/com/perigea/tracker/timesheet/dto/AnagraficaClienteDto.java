@@ -20,8 +20,6 @@ public class AnagraficaClienteDto {
 	private Integer progressivoPerCommesse;
 	private TipologiaPagamentoType tipologiaPagamentoType;
 	private String notePerLaFatturazione;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -112,18 +110,6 @@ public class AnagraficaClienteDto {
 	}
 	public void setNotePerLaFatturazione(String notePerLaFatturazione) {
 		this.notePerLaFatturazione = notePerLaFatturazione;
-	}
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 	public String getCreateUser() {
 		return createUser;

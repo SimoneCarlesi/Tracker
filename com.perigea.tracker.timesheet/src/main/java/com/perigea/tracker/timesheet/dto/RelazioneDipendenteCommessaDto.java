@@ -15,8 +15,6 @@ public class RelazioneDipendenteCommessaDto {
 	private Double importoPrevisto;
 	private Double importoErogato;
 	private Double importoResiduo;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 
@@ -111,22 +109,6 @@ public class RelazioneDipendenteCommessaDto {
 
 	public void setImportoResiduo(Double importoResiduo) {
 		this.importoResiduo = importoResiduo;
-	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 
 	public String getCreateUser() {

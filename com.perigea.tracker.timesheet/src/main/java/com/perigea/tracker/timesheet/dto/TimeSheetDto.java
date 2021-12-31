@@ -14,8 +14,6 @@ public class TimeSheetDto {
 	private Integer ore;
 	private Boolean trasferta;
 	private StatoType statoType;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -122,28 +120,6 @@ public class TimeSheetDto {
 	}
 
 
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
 
 
 

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "commessa_non_fatturabile")
-public class CommessaNonFatturabileEntity extends CommessaEntity {
+public class CommessaNonFatturabile extends Commessa {
 
 	@Id
 	@Column(name="codice_commessa")
@@ -20,17 +20,17 @@ public class CommessaNonFatturabileEntity extends CommessaEntity {
 	@MapsId
 	@OneToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
-	private CommessaEntity commessaNoFat;
+	private Commessa commessaNonFatturabile;
 
 	@Column(name = "descrizione")
 	private String descrizione;
 
-	public CommessaEntity getCommessaNoFat() {
-		return commessaNoFat;
+	public Commessa getCommessaNoFat() {
+		return commessaNonFatturabile;
 	}
 
-	public void setCommessaNoFat(CommessaEntity commessaNoFat) {
-		this.commessaNoFat = commessaNoFat;
+	public void setCommessaNonFatturabile(Commessa commessaNonFatturabile) {
+		this.commessaNonFatturabile = commessaNonFatturabile;
 	}
 
 	public String getDescrizione() {

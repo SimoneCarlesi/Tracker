@@ -8,8 +8,6 @@ public class CommessaDto {
 	
 	private String codiceCommessa;
 	private TipoCommessaType tipoCommessaType;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -29,18 +27,6 @@ public class CommessaDto {
 	}
 	public void setTipoCommessaType(TipoCommessaType tipoCommessaType) {
 		this.tipoCommessaType = tipoCommessaType;
-	}
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 	public String getCreateUser() {
 		return createUser;

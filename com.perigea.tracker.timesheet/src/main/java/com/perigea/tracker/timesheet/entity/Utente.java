@@ -15,7 +15,7 @@ import com.perigea.tracker.timesheet.enumerator.StatoUtenteType;
 
 @Entity
 @Table(name = "utente")
-public class UtenteEntity {
+public class Utente {
 
 	@Id
 	@Column(name = "codice_persona", nullable = false)
@@ -46,20 +46,20 @@ public class UtenteEntity {
 	private String lastUpdateUser;
 	
 
-	@OneToMany(mappedBy = "utenteSpesa", cascade = CascadeType.ALL)
-	private List<NotaSpeseEntity> spese = new ArrayList<>();
+	@OneToMany(mappedBy = "utenteSpesa")
+	private List<NotaSpese> spese = new ArrayList<>();
 
-	@OneToOne(mappedBy = "utenteDip")
-	private AnagraficaDipendenteEntity dipendente;
+	@OneToOne(mappedBy = "utenteDipendente")
+	private AnagraficaDipendente dipendente;
 
-	@OneToMany(mappedBy = "utenteTime", cascade = CascadeType.ALL)
-	private List<TimeSheetEntity> timeSheet = new ArrayList<>();
+	@OneToMany(mappedBy = "utenteTimeSheet")
+	private List<TimeSheet> timeSheet = new ArrayList<>();
 
-	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
-	private List<RelazioneDipendenteCommessaEntity> relazione = new ArrayList<>();
+	@OneToMany(mappedBy = "utente")
+	private List<RelazioneDipendenteCommessa> relazione = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "utenti")
-	private List<RuoliEntity> ruoli = new ArrayList<>();
+//	@ManyToMany(mappedBy = "utenti")
+//	private List<Ruoli> ruoli = new ArrayList<>();
 
 	public String getCodicePersona() {
 		return codicePersona;
@@ -133,44 +133,44 @@ public class UtenteEntity {
 		this.lastUpdateUser = lastUpdateUser;
 	}
 
-	public List<NotaSpeseEntity> getSpese() {
-		return spese;
-	}
-
-	public void setSpese(List<NotaSpeseEntity> spese) {
-		this.spese = spese;
-	}
-
-	public AnagraficaDipendenteEntity getDipendente() {
-		return dipendente;
-	}
-
-	public void setDipendente(AnagraficaDipendenteEntity dipendente) {
-		this.dipendente = dipendente;
-	}
-
-	public List<TimeSheetEntity> getTimeSheet() {
-		return timeSheet;
-	}
-
-	public void setTimeSheet(List<TimeSheetEntity> timeSheet) {
-		this.timeSheet = timeSheet;
-	}
-
-	public List<RelazioneDipendenteCommessaEntity> getRelazione() {
-		return relazione;
-	}
-
-	public void setRelazione(List<RelazioneDipendenteCommessaEntity> relazione) {
-		this.relazione = relazione;
-	}
-
-	public List<RuoliEntity> getRuoli() {
-		return ruoli;
-	}
-
-	public void setRuoli(List<RuoliEntity> ruoli) {
-		this.ruoli = ruoli;
-	}
+//	public List<NotaSpeseEntity> getSpese() {
+//		return spese;
+//	}
+//
+//	public void setSpese(List<NotaSpeseEntity> spese) {
+//		this.spese = spese;
+//	}
+//
+//	public AnagraficaDipendenteEntity getDipendente() {
+//		return dipendente;
+//	}
+//
+//	public void setDipendente(AnagraficaDipendenteEntity dipendente) {
+//		this.dipendente = dipendente;
+//	}
+//
+//	public List<TimeSheetEntity> getTimeSheet() {
+//		return timeSheet;
+//	}
+//
+//	public void setTimeSheet(List<TimeSheetEntity> timeSheet) {
+//		this.timeSheet = timeSheet;
+//	}
+//
+//	public List<RelazioneDipendenteCommessaEntity> getRelazione() {
+//		return relazione;
+//	}
+//
+//	public void setRelazione(List<RelazioneDipendenteCommessaEntity> relazione) {
+//		this.relazione = relazione;
+//	}
+//
+//	public List<RuoliEntity> getRuoli() {
+//		return ruoli;
+//	}
+//
+//	public void setRuoli(List<RuoliEntity> ruoli) {
+//		this.ruoli = ruoli;
+//	}
 
 }

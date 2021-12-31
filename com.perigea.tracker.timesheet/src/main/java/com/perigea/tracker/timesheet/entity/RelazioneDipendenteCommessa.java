@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelationshipIdRelazioneDipendenteCommessaEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdRelazioneDipendenteCommessaEntity;
 
 @Entity
-@IdClass(RelationshipIdRelazioneDipendenteCommessaEntity.class)
+@IdClass(RelazioneIdRelazioneDipendenteCommessaEntity.class)
 @Table(name = "relazione_dipendente_commessa")
-public class RelazioneDipendenteCommessaEntity implements Serializable{
+public class RelazioneDipendenteCommessa implements Serializable{
 
 	@Id
 	@Column(name="codice_persona")
@@ -26,7 +26,7 @@ public class RelazioneDipendenteCommessaEntity implements Serializable{
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona", nullable = false)
-	private UtenteEntity utente;
+	private Utente utente;
 
 	@Id
 	@Column(name="codice_commessa")
@@ -35,7 +35,7 @@ public class RelazioneDipendenteCommessaEntity implements Serializable{
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
-	private CommessaEntity commessa;
+	private Commessa commessa;
 
 	@Column(name = "data_inizio_allocazione")
 	private Date dataInizioAllocazione;
@@ -76,19 +76,19 @@ public class RelazioneDipendenteCommessaEntity implements Serializable{
 	@Column(name="last_update_user")
 	private String lastUpdateUser;
 
-	public UtenteEntity getUtente() {
+	public Utente getUtente() {
 		return utente;
 	}
 
-	public void setUtente(UtenteEntity utente) {
+	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
 
-	public CommessaEntity getCommessa() {
+	public Commessa getCommessa() {
 		return commessa;
 	}
 
-	public void setCommessa(CommessaEntity commessa) {
+	public void setCommessa(Commessa commessa) {
 		this.commessa = commessa;
 	}
 

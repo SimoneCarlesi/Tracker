@@ -2,7 +2,7 @@ package com.perigea.tracker.timesheet.compositekeys;
 
 import java.io.Serializable;
 
-public class RelationshipIdNotaSpeseEntity implements Serializable {
+public class RelazioneIdNotaSpeseEntity implements Serializable {
 
 	private Integer annoDiRiferimento;
 	private Integer meseDiRiferimento;

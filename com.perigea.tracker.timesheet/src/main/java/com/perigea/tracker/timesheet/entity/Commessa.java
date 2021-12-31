@@ -16,8 +16,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 
 @Entity
 @Table(name="commessa")
-public class CommessaEntity {
-
+public class Commessa {
 
 	@Id
 	@Column(name="codice_commessa")
@@ -41,19 +40,19 @@ public class CommessaEntity {
 
 	
 	@OneToOne(mappedBy="commessaSpesa")
-	private NotaSpeseEntity notaSpese;
+	private NotaSpese notaSpese;
 	
-	@OneToMany(mappedBy = "commessaTime", cascade = CascadeType.ALL)
-	private List<TimeSheetEntity> timeSheet = new ArrayList<>();
+	@OneToMany(mappedBy = "commessaTimeSheet", cascade = CascadeType.ALL)
+	private List<TimeSheet> timeSheet = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "commessaNoFat")
-	private CommessaNonFatturabileEntity commNoFat;
+	@OneToOne(mappedBy = "commessaNonFatturabile")
+	private CommessaNonFatturabile commessaNonFatturabile;
 	
 	@OneToMany(mappedBy= "commessa", cascade = CascadeType.ALL)
-	private List<RelazioneDipendenteCommessaEntity> relazione = new ArrayList<>();
+	private List<RelazioneDipendenteCommessa> relazione = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "commessaFat")
-	private CommessaFatturabileEntity commFat;
+	@OneToOne(mappedBy = "commessaFatturabile")
+	private CommessaFatturabile commessaFatturabile;
 
 	public String getCodiceCommessa() {
 		return codiceCommessa;
@@ -103,44 +102,44 @@ public class CommessaEntity {
 		this.lastUpdateUser = lastUpdateUser;
 	}
 
-	public NotaSpeseEntity getNotaSpese() {
+	public NotaSpese getNotaSpese() {
 		return notaSpese;
 	}
 
-	public void setNotaSpese(NotaSpeseEntity notaSpese) {
+	public void setNotaSpese(NotaSpese notaSpese) {
 		this.notaSpese = notaSpese;
 	}
 
-	public List<TimeSheetEntity> getTimeSheet() {
+	public List<TimeSheet> getTimeSheet() {
 		return timeSheet;
 	}
 
-	public void setTimeSheet(List<TimeSheetEntity> timeSheet) {
+	public void setTimeSheet(List<TimeSheet> timeSheet) {
 		this.timeSheet = timeSheet;
 	}
 
-	public CommessaNonFatturabileEntity getCommNoFat() {
-		return commNoFat;
+	public CommessaNonFatturabile getCommessaNonFatturabile() {
+		return commessaNonFatturabile;
 	}
 
-	public void setCommNoFat(CommessaNonFatturabileEntity commNoFat) {
-		this.commNoFat = commNoFat;
+	public void setCommessaNonFatturabile(CommessaNonFatturabile commessaNonFatturabile) {
+		this.commessaNonFatturabile = commessaNonFatturabile;
 	}
 
-	public List<RelazioneDipendenteCommessaEntity> getRelazione() {
+	public List<RelazioneDipendenteCommessa> getRelazione() {
 		return relazione;
 	}
 
-	public void setRelazione(List<RelazioneDipendenteCommessaEntity> relazione) {
+	public void setRelazione(List<RelazioneDipendenteCommessa> relazione) {
 		this.relazione = relazione;
 	}
 
-	public CommessaFatturabileEntity getCommFat() {
-		return commFat;
+	public CommessaFatturabile getCommessaFatturabile() {
+		return commessaFatturabile;
 	}
 
-	public void setCommFat(CommessaFatturabileEntity commFat) {
-		this.commFat = commFat;
+	public void setCommessaFatturabile(CommessaFatturabile commessaFatturabile) {
+		this.commessaFatturabile = commessaFatturabile;
 	}
 	
 }

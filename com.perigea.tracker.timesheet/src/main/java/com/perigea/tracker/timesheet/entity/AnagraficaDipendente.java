@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "anagrafica_dipendente")
-public class AnagraficaDipendenteEntity implements Serializable {
+public class AnagraficaDipendente implements Serializable {
 
 	@Id
 	@Column(name="codice_persona")
@@ -21,7 +21,7 @@ public class AnagraficaDipendenteEntity implements Serializable {
 	@MapsId
 	@OneToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona")
-	private UtenteEntity utenteDip;
+	private Utente utenteDipendente;
 
 	@Column(name = "luogo_di_nascita")
 	private String luogoDiNascita;
@@ -86,12 +86,12 @@ public class AnagraficaDipendenteEntity implements Serializable {
 	@Column(name = "last_update_user")
 	private String lastUpdateUser;
 
-	public UtenteEntity getUtenteDip() {
-		return utenteDip;
+	public Utente getUtenteDipendente() {
+		return utenteDipendente;
 	}
 
-	public void setUtenteDip(UtenteEntity utenteDip) {
-		this.utenteDip = utenteDip;
+	public void setUtenteDipendente(Utente utenteDipendente) {
+		this.utenteDipendente = utenteDipendente;
 	}
 
 	public String getLuogoDiNascita() {

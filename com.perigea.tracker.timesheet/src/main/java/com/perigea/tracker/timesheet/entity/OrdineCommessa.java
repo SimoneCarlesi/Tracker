@@ -14,12 +14,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelationshipIdOrdineCommessaEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaEntity;
 
 @Entity
-@IdClass(RelationshipIdOrdineCommessaEntity.class)
+@IdClass(RelazioneIdOrdineCommessaEntity.class)
 @Table(name = "ordine_commessa")
-public class OrdineCommessaEntity implements Serializable {
+public class OrdineCommessa implements Serializable {
 
 	@Id
 	@Column(name="codice_commessa")
@@ -28,7 +28,7 @@ public class OrdineCommessaEntity implements Serializable {
 	@MapsId
 	@OneToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
-	private CommessaFatturabileEntity commessaFatturabile;
+	private CommessaFatturabile commessaFatturabile;
 
 	@Id
 	@Column(name = "numero_ordine_cliente")
@@ -36,7 +36,7 @@ public class OrdineCommessaEntity implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ragione_sociale_cliente", referencedColumnName = "ragione_sociale_cliente")
-	private AnagraficaClienteEntity ragioneSocialeCliente;
+	private AnagraficaCliente ragioneSocialeCliente;
 
 	@Column(name = "data_ordine")
 	private Date dataOrdine;
@@ -65,11 +65,11 @@ public class OrdineCommessaEntity implements Serializable {
 	@Column(name = "last_update_user")
 	private String lastUpdateUser;
 
-	public CommessaFatturabileEntity getCommessaFatturabile() {
+	public CommessaFatturabile getCommessaFatturabile() {
 		return commessaFatturabile;
 	}
 
-	public void setCommessaFatturabile(CommessaFatturabileEntity commessaFatturabile) {
+	public void setCommessaFatturabile(CommessaFatturabile commessaFatturabile) {
 		this.commessaFatturabile = commessaFatturabile;
 	}
 
@@ -81,11 +81,11 @@ public class OrdineCommessaEntity implements Serializable {
 		this.numeroOrdineCliente = numeroOrdineCliente;
 	}
 
-	public AnagraficaClienteEntity getRagioneSocialeCliente() {
+	public AnagraficaCliente getRagioneSocialeCliente() {
 		return ragioneSocialeCliente;
 	}
 
-	public void setRagioneSocialeCliente(AnagraficaClienteEntity ragioneSocialeCliente) {
+	public void setRagioneSocialeCliente(AnagraficaCliente ragioneSocialeCliente) {
 		this.ragioneSocialeCliente = ragioneSocialeCliente;
 	}
 

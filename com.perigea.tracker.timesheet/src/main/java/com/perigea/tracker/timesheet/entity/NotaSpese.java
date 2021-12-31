@@ -13,12 +13,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelationshipIdNotaSpeseEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdNotaSpeseEntity;
 
 @Entity
-@IdClass(RelationshipIdNotaSpeseEntity.class)
+@IdClass(RelazioneIdNotaSpeseEntity.class)
 @Table(name = "nota_spese")
-public class NotaSpeseEntity implements Serializable {
+public class NotaSpese implements Serializable {
 
 	@Id
 	@Column(name = "anno_di_riferimento")
@@ -35,7 +35,7 @@ public class NotaSpeseEntity implements Serializable {
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona")
-	private UtenteEntity utenteSpesa;
+	private Utente utenteSpesa;
 
 	@Id
 	@Column(name="codice_commessa")
@@ -44,7 +44,7 @@ public class NotaSpeseEntity implements Serializable {
 	@MapsId
 	@OneToOne
 	@JoinColumn(name = "codice_commessa", nullable = false, referencedColumnName = "codice_commessa")
-	private CommessaEntity commessaSpesa;
+	private Commessa commessaSpesa;
 
 	@Id
 	@Column(name = "giorno_di_riferimento")
@@ -85,19 +85,19 @@ public class NotaSpeseEntity implements Serializable {
 		this.meseDiRiferimento = meseDiRiferimento;
 	}
 
-	public UtenteEntity getUtenteSpesa() {
+	public Utente getUtenteSpesa() {
 		return utenteSpesa;
 	}
 
-	public void setUtenteSpesa(UtenteEntity utenteSpesa) {
+	public void setUtenteSpesa(Utente utenteSpesa) {
 		this.utenteSpesa = utenteSpesa;
 	}
 
-	public CommessaEntity getCommessaSpesa() {
+	public Commessa getCommessaSpesa() {
 		return commessaSpesa;
 	}
 
-	public void setCommessaSpesa(CommessaEntity commessaSpesa) {
+	public void setCommessaSpesa(Commessa commessaSpesa) {
 		this.commessaSpesa = commessaSpesa;
 	}
 

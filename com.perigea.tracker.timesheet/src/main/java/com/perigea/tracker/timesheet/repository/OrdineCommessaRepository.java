@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.perigea.tracker.timesheet.compositekeys.RelationshipIdOrdineCommessaEntity;
-import com.perigea.tracker.timesheet.entity.OrdineCommessaEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaEntity;
+import com.perigea.tracker.timesheet.entity.OrdineCommessa;
 
 @Repository
-public interface OrdineCommessaRepository extends JpaRepository<OrdineCommessaEntity, RelationshipIdOrdineCommessaEntity> {
+public interface OrdineCommessaRepository extends JpaRepository<OrdineCommessa, RelazioneIdOrdineCommessaEntity> {
 
 	 @Query(value = "some query", nativeQuery = true)
 	    Long findAmountOfFriends(@Param("userId") Long userId);

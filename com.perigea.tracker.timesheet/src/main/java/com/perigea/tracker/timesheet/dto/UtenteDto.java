@@ -12,8 +12,6 @@ public class UtenteDto {
 	private String cognome;
 	private String password;
 	private StatoUtenteType statoUtenteType;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -50,18 +48,6 @@ public class UtenteDto {
 	}
 	public void setStatoUtenteType(StatoUtenteType statoUtenteType) {
 		this.statoUtenteType = statoUtenteType;
-	}
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 	public String getCreateUser() {
 		return createUser;

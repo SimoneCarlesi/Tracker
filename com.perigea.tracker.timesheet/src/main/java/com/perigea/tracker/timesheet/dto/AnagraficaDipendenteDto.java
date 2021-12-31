@@ -22,42 +22,14 @@ public class AnagraficaDipendenteDto {
 	private String iban;
 	private Date dataCessazione;
 	private String codiceFiscale;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
 	
-	public AnagraficaDipendenteDto(String codicePersona, String luogoDiNascita, Date dataDiNascita, String mailAziendale,
-			String mailPrivata, String cellulare, String provinciaDiDomicilio, String comuneDiDomicilio,
-			String indirizzoDiDomicilio, String provinciaDiResidenza, String comuneDiResidenza,
-			String indirizzoDiResidenza, String nomeContattoEmergenza, String cellulareContattoEmergenza,
-			Date dataAssunzione, String iban, Date dataCessazione, String codiceFiscale, Date createTimestamp,
-			Date lastUpdateTimestamp, String createUser, String lastUpdateUser) {
+	public AnagraficaDipendenteDto() {
 		super();
-		this.codicePersona = codicePersona;
-		this.luogoDiNascita = luogoDiNascita;
-		this.dataDiNascita = dataDiNascita;
-		this.mailAziendale = mailAziendale;
-		this.mailPrivata = mailPrivata;
-		this.cellulare = cellulare;
-		this.provinciaDiDomicilio = provinciaDiDomicilio;
-		this.comuneDiDomicilio = comuneDiDomicilio;
-		this.indirizzoDiDomicilio = indirizzoDiDomicilio;
-		this.provinciaDiResidenza = provinciaDiResidenza;
-		this.comuneDiResidenza = comuneDiResidenza;
-		this.indirizzoDiResidenza = indirizzoDiResidenza;
-		this.nomeContattoEmergenza = nomeContattoEmergenza;
-		this.cellulareContattoEmergenza = cellulareContattoEmergenza;
-		this.dataAssunzione = dataAssunzione;
-		this.iban = iban;
-		this.dataCessazione = dataCessazione;
-		this.codiceFiscale = codiceFiscale;
-		this.createTimestamp = createTimestamp;
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-		this.createUser = createUser;
-		this.lastUpdateUser = lastUpdateUser;
 	}
+	
 	public String getCodicePersona() {
 		return codicePersona;
 	}
@@ -165,18 +137,6 @@ public class AnagraficaDipendenteDto {
 	}
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
-	}
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
 	}
 	public String getCreateUser() {
 		return createUser;

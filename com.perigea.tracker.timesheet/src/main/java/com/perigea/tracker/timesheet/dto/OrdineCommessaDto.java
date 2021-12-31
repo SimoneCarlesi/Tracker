@@ -12,8 +12,6 @@ public class OrdineCommessaDto {
 	private Date dataInizio;
 	private Date dataFine;
 	private Double importoResiduo;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -85,21 +83,6 @@ public class OrdineCommessaDto {
 		this.importoResiduo = importoResiduo;
 	}
 
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
 
 	public String getCreateUser() {
 		return createUser;

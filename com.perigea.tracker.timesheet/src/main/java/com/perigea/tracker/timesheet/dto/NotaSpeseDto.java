@@ -13,8 +13,6 @@ public class NotaSpeseDto {
 	private Integer giornoDiRiferimento;
 	private TipoCostoNotaSpeseType tipoCostoNotaSpeseType;
 	private Double importo;
-	private Date createTimestamp;
-	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
@@ -77,23 +75,7 @@ public class NotaSpeseDto {
 	public void setImporto(Double importo) {
 		this.importo = importo;
 	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
-
+	
 	public String getCreateUser() {
 		return createUser;
 	}
