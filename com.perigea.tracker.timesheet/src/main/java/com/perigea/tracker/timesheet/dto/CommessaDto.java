@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 
-public class Commessa {
+public class CommessaDto {
 	
 	private String codiceCommessa;
 	private TipoCommessaType tipoCommessaType;
@@ -15,15 +15,8 @@ public class Commessa {
 	
 	
 	
-	public Commessa(String codiceCommessa, TipoCommessaType tipoCommessaType, Date createTimestamp,
-			Date lastUpdateTimestamp, String createUser, String lastUpdateUser) {
+	public CommessaDto() {
 		super();
-		this.codiceCommessa = codiceCommessa;
-		this.tipoCommessaType = tipoCommessaType;
-		this.createTimestamp = createTimestamp;
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-		this.createUser = createUser;
-		this.lastUpdateUser = lastUpdateUser;
 	}
 	public String getCodiceCommessa() {
 		return codiceCommessa;

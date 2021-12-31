@@ -4,50 +4,37 @@ import java.util.Date;
 
 import com.perigea.tracker.timesheet.enumerator.TipoCostoNotaSpeseType;
 
-public class NotaSpese {
+public class NotaSpeseDto {
 
-	private int annoDiRiferimento;
-	private int meseDiRiferimento;
+	private Integer annoDiRiferimento;
+	private Integer meseDiRiferimento;
 	private String codicePersona;
 	private String codiceCommessa;
-	private int giornoDiRiferimento;
+	private Integer giornoDiRiferimento;
 	private TipoCostoNotaSpeseType tipoCostoNotaSpeseType;
-	private double importo;
+	private Double importo;
 	private Date createTimestamp;
 	private Date lastUpdateTimestamp;
 	private String createUser;
 	private String lastUpdateUser;
 	
-	public NotaSpese(int annoDiRiferimento, int meseDiRiferimento, String codicePersona, String codiceCommessa,
-			int giornoDiRiferimento, TipoCostoNotaSpeseType tipoCostoNotaSpeseType, double importo,
-			Date createTimestamp, Date lastUpdateTimestamp, String createUser, String lastUpdateUser) {
+	public NotaSpeseDto() {
 		super();
-		this.annoDiRiferimento = annoDiRiferimento;
-		this.meseDiRiferimento = meseDiRiferimento;
-		this.codicePersona = codicePersona;
-		this.codiceCommessa = codiceCommessa;
-		this.giornoDiRiferimento = giornoDiRiferimento;
-		this.tipoCostoNotaSpeseType = tipoCostoNotaSpeseType;
-		this.importo = importo;
-		this.createTimestamp = createTimestamp;
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-		this.createUser = createUser;
-		this.lastUpdateUser = lastUpdateUser;
 	}
 
-	public int getAnnoDiRiferimento() {
+	public Integer getAnnoDiRiferimento() {
 		return annoDiRiferimento;
 	}
 
-	public void setAnnoDiRiferimento(int annoDiRiferimento) {
+	public void setAnnoDiRiferimento(Integer annoDiRiferimento) {
 		this.annoDiRiferimento = annoDiRiferimento;
 	}
 
-	public int getMeseDiRiferimento() {
+	public Integer getMeseDiRiferimento() {
 		return meseDiRiferimento;
 	}
 
-	public void setMeseDiRiferimento(int meseDiRiferimento) {
+	public void setMeseDiRiferimento(Integer meseDiRiferimento) {
 		this.meseDiRiferimento = meseDiRiferimento;
 	}
 
@@ -67,11 +54,11 @@ public class NotaSpese {
 		this.codiceCommessa = codiceCommessa;
 	}
 
-	public int getGiornoDiRiferimento() {
+	public Integer getGiornoDiRiferimento() {
 		return giornoDiRiferimento;
 	}
 
-	public void setGiornoDiRiferimento(int giornoDiRiferimento) {
+	public void setGiornoDiRiferimento(Integer giornoDiRiferimento) {
 		this.giornoDiRiferimento = giornoDiRiferimento;
 	}
 
@@ -83,11 +70,11 @@ public class NotaSpese {
 		this.tipoCostoNotaSpeseType = tipoCostoNotaSpeseType;
 	}
 
-	public double getImporto() {
+	public Double getImporto() {
 		return importo;
 	}
 
-	public void setImporto(double importo) {
+	public void setImporto(Double importo) {
 		this.importo = importo;
 	}
 
@@ -122,6 +109,8 @@ public class NotaSpese {
 	public void setLastUpdateUser(String lastUpdateUser) {
 		this.lastUpdateUser = lastUpdateUser;
 	}
+
+	
 	
 	
 }

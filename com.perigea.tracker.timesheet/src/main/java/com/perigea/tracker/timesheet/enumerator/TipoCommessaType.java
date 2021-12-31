@@ -8,5 +8,4 @@ public enum TipoCommessaType {
 	TipoCommessaType(String string) {
 		// TODO Auto-generated constructor stub
 	}
-
 }

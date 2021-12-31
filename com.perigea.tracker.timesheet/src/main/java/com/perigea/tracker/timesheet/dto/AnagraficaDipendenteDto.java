@@ -2,7 +2,7 @@ package com.perigea.tracker.timesheet.dto;
 
 import java.util.Date;
 
-public class AnagraficaDipendente {
+public class AnagraficaDipendenteDto {
 	
 	private String codicePersona;
 	private String luogoDiNascita;
@@ -28,7 +28,7 @@ public class AnagraficaDipendente {
 	private String lastUpdateUser;
 	
 	
-	public AnagraficaDipendente(String codicePersona, String luogoDiNascita, Date dataDiNascita, String mailAziendale,
+	public AnagraficaDipendenteDto(String codicePersona, String luogoDiNascita, Date dataDiNascita, String mailAziendale,
 			String mailPrivata, String cellulare, String provinciaDiDomicilio, String comuneDiDomicilio,
 			String indirizzoDiDomicilio, String provinciaDiResidenza, String comuneDiResidenza,
 			String indirizzoDiResidenza, String nomeContattoEmergenza, String cellulareContattoEmergenza,

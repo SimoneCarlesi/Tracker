@@ -17,22 +17,10 @@ public class UtenteDto {
 	private String createUser;
 	private String lastUpdateUser;
 	
-	
-	
-	public UtenteDto(String codicePersona, String nome, String cognome, String password,
-			StatoUtenteType statoUtenteType, Date createTimestamp, Date lastUpdateTimestamp, String createUser,
-			String lastUpdateUser) {
-		super();
-		this.codicePersona = codicePersona;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.password = password;
-		this.statoUtenteType = statoUtenteType;
-		this.createTimestamp = createTimestamp;
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-		this.createUser = createUser;
-		this.lastUpdateUser = lastUpdateUser;
+	public UtenteDto() {
+		
 	}
+	
 	public String getCodicePersona() {
 		return codicePersona;
 	}
