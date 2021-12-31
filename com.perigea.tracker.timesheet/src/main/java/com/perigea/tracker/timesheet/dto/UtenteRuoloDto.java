@@ -5,6 +5,7 @@ import com.perigea.tracker.timesheet.enumerator.RuoloType;
 public class UtenteRuoloDto {
 	private String codicePersona;
 	private RuoloType ruoloType; 
+	
 	public UtenteRuoloDto() {
 		super();
 

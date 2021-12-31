@@ -25,7 +25,7 @@ public class CommessaNonFatturabile extends Commessa {
 	@Column(name = "descrizione")
 	private String descrizione;
 
-	public Commessa getCommessaNoFat() {
+	public Commessa getCommessaNoFatt() {
 		return commessaNonFatturabile;
 	}
 

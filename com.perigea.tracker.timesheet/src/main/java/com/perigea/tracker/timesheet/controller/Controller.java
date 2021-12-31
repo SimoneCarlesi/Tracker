@@ -8,15 +8,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.perigea.tracker.timesheet.converter.BodyConverter;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.entity.Ruoli;
 import com.perigea.tracker.timesheet.entity.Utente;
 import com.perigea.tracker.timesheet.service.ServiceImpl;
 
+//@ TODO mapstruct controllare cosa fa per gestire il get e le entity
+//@ TODO non restituire mai le entity
+//@ TODO creare una response entity generica e usare come ritorno la response T
+//@ TODO creare un dto generico di risposta che contenga data richiesta,, utente che la fa e il risultato
+//@ TODO gestire le eccezioni lato controller, exception handler ( eccezioni custom)
+
 @RestController
 public class Controller {
 
+	//@ TODO cambiare nome
 	@Autowired
 	private ServiceImpl service;
 
@@ -89,5 +97,12 @@ public class Controller {
 		Ruoli entity=service.updateRole(dto, key);
 		return ResponseEntity.ok().body(entity);
 
+	}
+
+	// Metodo per creare un timesheet
+	@PostMapping(value = "/createTimeSheet")
+	public ResponseEntity <String> createTimeSheet(@RequestParam String key, @RequestBody BodyConverter bodyConverter) {
+		service.createTimeSheet(key,bodyConverter);
+		return ResponseEntity.ok("TimeSheet creato");
 	}
 }

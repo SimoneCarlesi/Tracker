@@ -14,12 +14,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaKey;
 
 @Entity
-@IdClass(RelazioneIdOrdineCommessaEntity.class)
+@IdClass(RelazioneIdOrdineCommessaKey.class)
 @Table(name = "ordine_commessa")
-public class OrdineCommessa implements Serializable {
+public class OrdineCommessa{
 
 	@Id
 	@Column(name="codice_commessa")

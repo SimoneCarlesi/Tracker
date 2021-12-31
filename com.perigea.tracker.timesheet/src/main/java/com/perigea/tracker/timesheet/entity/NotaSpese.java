@@ -13,12 +13,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdNotaSpeseEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdNotaSpeseKey;
 
 @Entity
-@IdClass(RelazioneIdNotaSpeseEntity.class)
+@IdClass(RelazioneIdNotaSpeseKey.class)
 @Table(name = "nota_spese")
-public class NotaSpese implements Serializable {
+public class NotaSpese {
 
 	@Id
 	@Column(name = "anno_di_riferimento")

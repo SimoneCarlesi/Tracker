@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -31,8 +33,10 @@ public class Utente {
 	private String password;
 
 	@Column(name = "stato_utente")
-	private String statoUtenteType;
+	@Enumerated(EnumType.STRING)
+	private StatoUtenteType statoUtenteType;
 
+	//@ TODO sfruttare ereditarietà di java, metterli in una classe a parte BaseEntity
 	@Column(name = "create_timestamp")
 	private Date createTimestamp;
 
@@ -58,8 +62,8 @@ public class Utente {
 	@OneToMany(mappedBy = "utente")
 	private List<RelazioneDipendenteCommessa> relazione = new ArrayList<>();
 	
-//	@ManyToMany(mappedBy = "utenti")
-//	private List<Ruoli> ruoli = new ArrayList<>();
+	@OneToMany(mappedBy = "utente")
+	private List<UtenteRuolo> utenteRuolo = new ArrayList<>();
 
 	public String getCodicePersona() {
 		return codicePersona;
@@ -93,11 +97,11 @@ public class Utente {
 		this.password = password;
 	}
 
-	public String getStatoUtenteType() {
+	public StatoUtenteType getStatoUtenteType() {
 		return statoUtenteType;
 	}
 
-	public void setStatoUtenteType(String statoUtenteType) {
+	public void setStatoUtenteType(StatoUtenteType statoUtenteType) {
 		this.statoUtenteType = statoUtenteType;
 	}
 

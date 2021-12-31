@@ -42,13 +42,13 @@ public class Commessa {
 	@OneToOne(mappedBy="commessaSpesa")
 	private NotaSpese notaSpese;
 	
-	@OneToMany(mappedBy = "commessaTimeSheet", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "commessaTimeSheet")
 	private List<TimeSheet> timeSheet = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "commessaNonFatturabile")
 	private CommessaNonFatturabile commessaNonFatturabile;
 	
-	@OneToMany(mappedBy= "commessa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy= "commessa")
 	private List<RelazioneDipendenteCommessa> relazione = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "commessaFatturabile")

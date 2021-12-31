@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.perigea.tracker.timesheet.enumerator.TipoCommessaFatturabileType;
 
 @Entity
 @Table(name = "commessa_fatturabile")

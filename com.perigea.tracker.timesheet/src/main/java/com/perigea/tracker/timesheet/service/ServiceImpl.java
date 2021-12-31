@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.Controller;
+import com.perigea.tracker.timesheet.converter.BodyConverter;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
@@ -19,6 +20,7 @@ import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
+import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.CommessaNonFatturabile;
 import com.perigea.tracker.timesheet.entity.OrdineCommessa;
 import com.perigea.tracker.timesheet.entity.RelazioneDipendenteCommessa;
@@ -58,7 +60,8 @@ public class ServiceImpl implements ServiceInterface {
 	@Autowired
 	private RelazioneDipendenteCommessaRepository relazioneDipComRepo;
 	
-	
+	//@ TODO controllare spring security.
+	//@ TODO parametri di autenticazione con le chiamate rest
 	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 	private static final Map<String,String> mapEditUser=new HashMap<>();
 	
@@ -75,7 +78,7 @@ public class ServiceImpl implements ServiceInterface {
 			user.setNome(userParam.getNome());
 			user.setCognome(userParam.getCognome());
 			user.setPassword(userParam.getPassword());
-			user.setStatoUtenteType(userParam.getStatoUtenteType().toString());
+			user.setStatoUtenteType(userParam.getStatoUtenteType());
 			user.setCreateUser(mapEditUser.get(key));
 			LOGGER.info("Utente creato");
 			userRepo.save(user);
@@ -105,7 +108,7 @@ public class ServiceImpl implements ServiceInterface {
 				entity.setNome(userParam.getCognome());
 				entity.setLastUpdateUser(mapEditUser.get(key));
 				entity.setPassword(userParam.getPassword());
-				entity.setStatoUtenteType(userParam.getStatoUtenteType().toString());
+				entity.setStatoUtenteType(userParam.getStatoUtenteType());
 				userRepo.save(entity);
 				return entity;
 			} else {
@@ -136,7 +139,7 @@ public class ServiceImpl implements ServiceInterface {
 		if(mapEditUser.containsKey(key)) {
 			Utente entity=userRepo.findByCodicePersona(userParam.getCodicePersona());
 			if(entity != null) {
-				entity.setStatoUtenteType(userParam.getStatoUtenteType().toString());
+				entity.setStatoUtenteType(userParam.getStatoUtenteType());
 				entity.setLastUpdateUser(mapEditUser.get(key));
 				userRepo.save(entity);
 				return entity;
@@ -184,9 +187,9 @@ public class ServiceImpl implements ServiceInterface {
 				entity.setRuoloType(roleParam.getRuoloType().toString());
 				roleRepo.save(entity);
 				return entity;
-			} else {
-				LOGGER.info("CreateUser non trovato");
 			}
+		} else {
+			LOGGER.info("CreateUser non trovato");
 		}
 		return null;
 	}
@@ -207,9 +210,9 @@ public class ServiceImpl implements ServiceInterface {
 		}
 	}
 	
-//	public void roleAssignmentToUser(RuoliDto roleParam, UtenteDto userParam, String key) {
+//	public void editRoleUser(RuoliDto roleParam, UtenteDto userParam, String key) {
 //		if(mapEditUser.containsKey(key)) {
-//			List<UtenteEntity> entity=userRepo.findByRuoloType(roleParam.getRuoloType());
+//			List<UtenteEntity> entity=userRepo.findByRuoloType(roleParam.getRuoloType().toString());
 //			for(UtenteEntity u: entity) {
 //				if(u.getCodicePersona().equalsIgnoreCase(userParam.getCodicePersona())) {
 //					u.setStatoUtenteType(userParam.getStatoUtenteType().toString());
@@ -221,19 +224,17 @@ public class ServiceImpl implements ServiceInterface {
 //	}
 	
 	
-	public void createTimeSheet(TimeSheetDto timeSheetParam, String key) {
+	public void createTimeSheet(String key, BodyConverter bodyConverter) {
 		if(mapEditUser.containsKey(key)) {
 			TimeSheet timeSheetEntity= new TimeSheet();
-			Date date=new Date();
-			timeSheetEntity.setAnnoDiRiferimento(timeSheetParam.getAnnoDiRiferimento());
-			timeSheetEntity.setMeseDiRiferimento(timeSheetParam.getMeseDiRiferimento());
-			timeSheetEntity.setGiornoDiRiferimento(timeSheetParam.getGiornoDiRiferimento());
-			timeSheetEntity.setStatoType(timeSheetParam.getStatoType().toString());
-//			timeSheetEntity.setUtenteTime(timeSheetParam.getCodicePersona());
-//			timeSheetEntity.setCommessaTime(timeSheetParam.getCodiceCommessa());
-			timeSheetEntity.setOre(timeSheetParam.getOre());
-			timeSheetEntity.setCreateUser(mapEditUser.get(key)+mapEditUser.get(key));
-			timeSheetEntity.setCreateTimestamp(date);
+			timeSheetEntity.setAnnoDiRiferimento(bodyConverter.getTimeDto().getAnnoDiRiferimento());
+			timeSheetEntity.setMeseDiRiferimento(bodyConverter.getTimeDto().getMeseDiRiferimento());
+			timeSheetEntity.setGiornoDiRiferimento(bodyConverter.getTimeDto().getGiornoDiRiferimento());
+			timeSheetEntity.setStatoType(bodyConverter.getTimeDto().getStatoType().toString());
+			timeSheetEntity.setUtenteTime(bodyConverter.getUtente());
+			timeSheetEntity.setCommessaTimeSheed(bodyConverter.getCommessa());
+			timeSheetEntity.setOre(bodyConverter.getTimeDto().getOre());
+			timeSheetEntity.setCreateUser(mapEditUser.get(key));
 			timeSheetRepo.save(timeSheetEntity);
 			LOGGER.info("TimeSheet creato e aggiunto a database");
 		} else {
@@ -242,9 +243,9 @@ public class ServiceImpl implements ServiceInterface {
 	}
 	
 	
-	public void editTimeSheet(TimeSheetDto timeSheetParam, String key) {
+	public void editTimeSheet(TimeSheetDto timeSheetParam, String key, Commessa commessa, Utente utente) {
 		if(mapEditUser.containsKey(key)) {
-			TimeSheet timeSheetEntity=timeSheetRepo.findByCodicePersona(timeSheetParam.getCodicePersona());
+			TimeSheet timeSheetEntity=timeSheetRepo.findByUtenteTimeSheet(utente);
 			if(timeSheetEntity != null) {
 				timeSheetRepo.delete(timeSheetEntity);
 				Date date=new Date();
@@ -252,8 +253,8 @@ public class ServiceImpl implements ServiceInterface {
 				timeSheetEntity.setMeseDiRiferimento(timeSheetParam.getMeseDiRiferimento());
 				timeSheetEntity.setGiornoDiRiferimento(timeSheetParam.getGiornoDiRiferimento());
 				timeSheetEntity.setStatoType(timeSheetParam.getStatoType().toString());
-//				timeSheetEntity.setUtenteTime(timeSheetParam.getCodicePersona());
-//				timeSheetEntity.setCommessaTime(timeSheetParam.getCodiceCommessa());
+				timeSheetEntity.setUtenteTime(utente);
+				timeSheetEntity.setCommessaTimeSheed(commessa);
 				timeSheetEntity.setOre(timeSheetParam.getOre());
 				timeSheetEntity.setLastUpdateUser(mapEditUser.get(key)+mapEditUser.get(key));
 				timeSheetEntity.setLastUpdateTimestamp(date);
@@ -267,17 +268,17 @@ public class ServiceImpl implements ServiceInterface {
 	
 	//-------------------------------------------------------------------------------------------
 	public void editStatusTimeSheet(TimeSheetDto timeSheetParam, String key) {
-		if(mapEditUser.containsKey(key)) {
-			TimeSheet timeSheetEntity=timeSheetRepo.findByCodicePersona(timeSheetParam.getCodiceCommessa());
-			if(timeSheetEntity != null) {
-				timeSheetEntity.setStatoType(timeSheetParam.getStatoType().toString());
-				timeSheetRepo.save(timeSheetEntity);
-			} else {
-				LOGGER.info("CodicePersona non trovato");
-			}
-		} else {
-			LOGGER.info("CreateUser non trovato");
-		}
+//		if(mapEditUser.containsKey(key)) {
+//			TimeSheet timeSheetEntity=timeSheetRepo.findByCodicePersona(timeSheetParam.getCodiceCommessa());
+//			if(timeSheetEntity != null) {
+//				timeSheetEntity.setStatoType(timeSheetParam.getStatoType().toString());
+//				timeSheetRepo.save(timeSheetEntity);
+//			} else {
+//				LOGGER.info("CodicePersona non trovato");
+//			}
+//		} else {
+//			LOGGER.info("CreateUser non trovato");
+//		}
 	}
 	
 	public void createCustomerPersonalData(AnagraficaClienteDto dtoParam, String key) {
@@ -447,8 +448,14 @@ public class ServiceImpl implements ServiceInterface {
 	}
 
 
+//	@Override
+//	public void roleAssignmentToUser(RuoliDto roleParam, UtenteDto userParam, String key) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 	@Override
-	public void roleAssignmentToUser(RuoliDto roleParam, UtenteDto userParam, String key) {
+	public void editRoleUser(RuoliDto roleParam, UtenteDto userParam, String key) {
 		// TODO Auto-generated method stub
 		
 	}

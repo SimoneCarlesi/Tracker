@@ -72,10 +72,10 @@ public class AnagraficaCliente {
 	@Column(name = "last_update_user")
 	private String lastUpdateUser;
 
-	@OneToMany(mappedBy = "ragioneSociale", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ragioneSociale")
 	private List<CommessaFatturabile> commessaFat = new ArrayList<>();
 
-	@OneToMany(mappedBy = "ragioneSocialeCliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ragioneSocialeCliente")
 	private List<OrdineCommessa> ordineComm = new ArrayList<>();
 
 	public String getRagioneSocialeCliente() {

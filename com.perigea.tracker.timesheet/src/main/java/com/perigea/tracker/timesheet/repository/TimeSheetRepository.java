@@ -6,13 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetKey;
 import com.perigea.tracker.timesheet.entity.TimeSheet;
+import com.perigea.tracker.timesheet.entity.Utente;
 
 @Repository
-public interface TimeSheetRepository extends JpaRepository<TimeSheet, RelazioneIdTimeSheetEntity> {
+public interface TimeSheetRepository extends JpaRepository<TimeSheet, RelazioneIdTimeSheetKey> {
 	
-	public TimeSheet findByCodicePersona(String codicePersona);
+	public TimeSheet findByUtenteTimeSheet(Utente utenteTimeSheet);
 
 	 @Query(value = "some query", nativeQuery = true)
 	    Long findAmountOfFriends(@Param("userId") Long userId);

@@ -1,5 +1,6 @@
 package com.perigea.tracker.timesheet.service;
 
+import com.perigea.tracker.timesheet.converter.BodyConverter;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
@@ -7,6 +8,7 @@ import com.perigea.tracker.timesheet.dto.RelazioneDipendenteCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
+import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.Ruoli;
 import com.perigea.tracker.timesheet.entity.Utente;
 
@@ -24,19 +26,19 @@ public interface ServiceInterface {
 	
 	public Utente editStatusUser(UtenteDto userParam, String key);
 	
+	public void editRoleUser(RuoliDto roleParam, UtenteDto userParam, String key);
+	
 	public void createRole(RuoliDto role, String key);
 	
 	public Ruoli readRole(String role, String key);
 	
 	public Ruoli updateRole(RuoliDto role,String key);
 	
-	public void deleteRole(String role,String key);
+	public void deleteRole(String role,String key);	
 	
-	public void roleAssignmentToUser(RuoliDto roleParam, UtenteDto userParam, String key);
+	public void createTimeSheet(String key, BodyConverter bodyConverter);
 	
-	public void createTimeSheet(TimeSheetDto timeSheetParam,String key);
-	
-	public void editTimeSheet(TimeSheetDto timeSheetParam,String key);
+	public void editTimeSheet(TimeSheetDto timeSheetParam,String key, Commessa commessa, Utente utente);
 	
 	public void createCustomerPersonalData(AnagraficaClienteDto dtoParam, String key);
 	

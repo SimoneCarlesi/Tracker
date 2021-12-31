@@ -1,6 +1,6 @@
 package com.perigea.tracker.timesheet.entity;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,17 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetEntity;
+import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetKey;
 
 @Entity
-@IdClass(RelazioneIdTimeSheetEntity.class)
+@IdClass(RelazioneIdTimeSheetKey.class)
 @Table(name = "time_sheet")
-public class TimeSheet implements Serializable {
+public class TimeSheet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "anno_di_riferimento")
@@ -31,28 +27,22 @@ public class TimeSheet implements Serializable {
 	@Id
 	@Column(name = "mese_di_riferimento")
 	private Integer meseDiRiferimento;
-
-	@Id
-	@Column(name="codice_persona")
-	private String codicePersona;
 	
+	@Id
+	@Column(name = "giorno_di_riferimento")
+	private Integer giornoDiRiferimento;
+
+
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona", nullable = false)
 	private Utente utenteTimeSheet;
 
-	@Id
-	@Column(name="codice_commessa")
-	private String codiceCommessa;
 	
 	@MapsId
 	@ManyToOne
 	@JoinColumn(name = "codice_commessa", referencedColumnName = "codice_commessa", nullable = false)
 	private Commessa commessaTimeSheet;
-
-	@Id
-	@Column(name = "giorno_di_riferimento")
-	private Integer giornoDiRiferimento;
 
 	@Column(name = "ore")
 	private Integer ore;

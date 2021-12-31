@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "anagrafica_dipendente")
-public class AnagraficaDipendente implements Serializable {
+public class AnagraficaDipendente {
 
 	@Id
 	@Column(name="codice_persona")

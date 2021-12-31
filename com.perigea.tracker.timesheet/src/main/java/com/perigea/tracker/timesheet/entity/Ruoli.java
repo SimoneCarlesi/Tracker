@@ -2,15 +2,14 @@ package com.perigea.tracker.timesheet.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.MapsId;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.perigea.tracker.timesheet.enumerator.RuoloType;
 
 @Entity
 @Table(name="ruoli")
@@ -22,14 +21,8 @@ public class Ruoli {
 	@Column(name="descrizione_ruolo")
 	private String descrizioneRuolo;
 	
-//	@MapsId
-//	@ManyToMany
-//	@JoinTable(
-//			name = "utente_ruolo",
-//			joinColumns = @JoinColumn(name = "ruolo"),
-//			inverseJoinColumns = @JoinColumn(name="codice_persona")
-//			)
-//	private List<Utente> utenti = new ArrayList<>();
+	@OneToMany(mappedBy = "ruolo")
+	private List<UtenteRuolo> utenteRuolo = new ArrayList<>();
 
 	public String getRuoloType() {
 		return ruoloType;
