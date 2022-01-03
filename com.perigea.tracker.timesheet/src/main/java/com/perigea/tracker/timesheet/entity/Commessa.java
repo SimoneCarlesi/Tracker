@@ -1,11 +1,14 @@
 package com.perigea.tracker.timesheet.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,14 +22,14 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 public class Commessa extends Base {
 
 	@Id
-	@Column(name="codice_commessa")
+	@Column(name="codice_commessa", nullable=false)
 	private String codiceCommessa;
 
 	@Column(name="tipo_commessa")
-	private String commessaType;
+	@Enumerated(EnumType.STRING)
+	private TipoCommessaType commessaType;
 	
 
-	
 	@OneToOne(mappedBy="commessaSpesa")
 	private NotaSpese notaSpese;
 	
@@ -50,11 +53,11 @@ public class Commessa extends Base {
 		this.codiceCommessa = codiceCommessa;
 	}
 
-	public String getCommessaType() {
+	public TipoCommessaType getCommessaType() {
 		return commessaType;
 	}
 
-	public void setCommessaType(String commessaType) {
+	public void setCommessaType(TipoCommessaType commessaType) {
 		this.commessaType = commessaType;
 	}
 

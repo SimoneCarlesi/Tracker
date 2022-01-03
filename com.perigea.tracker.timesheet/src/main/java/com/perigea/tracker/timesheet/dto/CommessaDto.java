@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 
-public class CommessaDto {
+public class CommessaDto  {
 	
 	private String codiceCommessa;
 	private TipoCommessaType tipoCommessaType;

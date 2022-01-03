@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
+
 public class Base {
 	
 	@Column(name = "create_timestamp")

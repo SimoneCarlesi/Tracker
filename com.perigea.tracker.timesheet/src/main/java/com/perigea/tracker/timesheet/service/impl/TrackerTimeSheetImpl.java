@@ -5,9 +5,10 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.TrackerController;
-import com.perigea.tracker.timesheet.converter.BodyConverter;
+import com.perigea.tracker.timesheet.converter.BodyConverterTimeSheet;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.TimeSheet;
@@ -15,6 +16,7 @@ import com.perigea.tracker.timesheet.entity.Utente;
 import com.perigea.tracker.timesheet.repository.TimeSheetRepository;
 import com.perigea.tracker.timesheet.service.TrackerTimeSheetInterface;
 
+@Service
 public class TrackerTimeSheetImpl implements TrackerTimeSheetInterface{
 
 	@Autowired
@@ -22,7 +24,7 @@ public class TrackerTimeSheetImpl implements TrackerTimeSheetInterface{
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
 
-	public void createTimeSheet( BodyConverter bodyConverter) {
+	public void createTimeSheet( BodyConverterTimeSheet bodyConverter) {
 		TimeSheet timeSheetEntity= new TimeSheet();
 		timeSheetEntity.setAnnoDiRiferimento(bodyConverter.getTimeDto().getAnnoDiRiferimento());
 		timeSheetEntity.setMeseDiRiferimento(bodyConverter.getTimeDto().getMeseDiRiferimento());

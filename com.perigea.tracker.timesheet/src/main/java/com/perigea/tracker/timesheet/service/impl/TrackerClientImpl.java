@@ -5,6 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.TrackerController;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
@@ -15,6 +16,7 @@ import com.perigea.tracker.timesheet.repository.AnagraficaClienteRepository;
 import com.perigea.tracker.timesheet.repository.OrdineCommessaRepository;
 import com.perigea.tracker.timesheet.service.TrackerClientInterface;
 
+@Service
 public class TrackerClientImpl implements TrackerClientInterface {
 	
 	@Autowired

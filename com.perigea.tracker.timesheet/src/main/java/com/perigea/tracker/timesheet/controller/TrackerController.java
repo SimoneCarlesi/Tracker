@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.converter.BodyConverter;
+import com.perigea.tracker.timesheet.converter.BodyConverterCommessaFatturabile;
+import com.perigea.tracker.timesheet.converter.BodyConverterTimeSheet;
+import com.perigea.tracker.timesheet.dto.CommessaDto;
+import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
-import com.perigea.tracker.timesheet.entity.Ruoli;
-import com.perigea.tracker.timesheet.entity.Utente;
+import com.perigea.tracker.timesheet.service.impl.TrackerCommessaImpl;
 import com.perigea.tracker.timesheet.service.impl.TrackerRoleImpl;
 import com.perigea.tracker.timesheet.service.impl.TrackerTimeSheetImpl;
 import com.perigea.tracker.timesheet.service.impl.TrackerUserImpl;
@@ -30,13 +32,16 @@ public class TrackerController {
 
 	@Autowired
 	private TrackerUserImpl userService;
-	
+
 	@Autowired
 	private TrackerRoleImpl roleService;
-	
+
 	@Autowired
 	private TrackerTimeSheetImpl timeSheetService;
-	
+
+	@Autowired
+	private TrackerCommessaImpl commessaService;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
 
 	// Metodo per creare un utente
@@ -145,12 +150,56 @@ public class TrackerController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/createTimeSheet")
-	public ResponseEntity <String> createTimeSheet(@RequestBody BodyConverter bodyConverter) {
+	public ResponseEntity <String> createTimeSheet(@RequestBody BodyConverterTimeSheet bodyConverter) {
 		try {
 			timeSheetService.createTimeSheet(bodyConverter);
 		} catch (Exception e) {
 			LOGGER.warn(e.getMessage());
 		}
 		return ResponseEntity.ok("TimeSheet creato");
+	}
+
+	// Metodo per creare un timesheet
+	@PostMapping(value = "/createCommessaNonFatturabile")
+	public ResponseEntity <String> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileDto commessaParam) {
+		try {
+			commessaService.createCommessaNonFatturabile(commessaParam);
+		} catch (Exception e) {
+			LOGGER.warn(e.getMessage());
+		}
+		return ResponseEntity.ok("CommessaNonFatturabile creata");
+	}
+	
+	// Metodo per creare un timesheet
+		@PostMapping(value = "/createCommessaFatturabile")
+		public ResponseEntity <String> createCommessaFatturabile(@RequestBody BodyConverterCommessaFatturabile commessaParam) {
+			try {
+				commessaService.createCommessaFatturabile(commessaParam);
+			} catch (Exception e) {
+				LOGGER.warn(e.getMessage());
+			}
+			return ResponseEntity.ok("CommessaFatturabile creata");
+		}
+
+	// Metodo per creare un timesheet
+	@PostMapping(value = "/deleteCommessaNonFatturabile")
+	public ResponseEntity <String> deleteCommessaNonFatturabile(@RequestParam CommessaNonFatturabileDto commessaParam) {
+		try {
+			commessaService.deleteCommessaNonFatturabile(commessaParam);
+		} catch (Exception e) {
+			LOGGER.warn(e.getMessage());
+		}
+		return ResponseEntity.ok("CommessaNonFatturabile cancellata");
+	}
+	
+	// Metodo per creare un timesheet
+	@PostMapping(value = "/createCommessa")
+	public ResponseEntity <String> createCommessa(@RequestBody CommessaDto commessaParam) {
+		try {
+			commessaService.createCommessa(commessaParam);
+		} catch (Exception e) {
+			LOGGER.warn(e.getMessage());
+		}
+		return ResponseEntity.ok("Commessa creata");
 	}
 }

@@ -13,10 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "commessa_fatturabile")
-public class CommessaFatturabile extends Commessa {
+public class CommessaFatturabile extends Base {
 
 	@Id
-	@Column(name="codice_commessa")
+	@Column(name="codice_commessa",nullable=false)
 	private String codiceCommessa;
 	
 	@MapsId
@@ -39,9 +39,6 @@ public class CommessaFatturabile extends Commessa {
 
 	@Column(name = "data_fine_commessa")
 	private Date dataFineCommessa;
-
-	@Column(name = "tipo_commessa")
-	private String tipoCommessa;
 
 	@Column(name = "importo_commessa_iniziale_presunto")
 	private Double importoCommessaInizialePresunto;
@@ -146,14 +143,6 @@ public class CommessaFatturabile extends Commessa {
 
 	public void setDataFineCommessa(Date dataFineCommessa) {
 		this.dataFineCommessa = dataFineCommessa;
-	}
-
-	public String getTipoCommessa() {
-		return tipoCommessa;
-	}
-
-	public void setTipoCommessa(String tipoCommessa) {
-		this.tipoCommessa = tipoCommessa;
 	}
 
 	public Double getImportoCommessaInizialePresunto() {

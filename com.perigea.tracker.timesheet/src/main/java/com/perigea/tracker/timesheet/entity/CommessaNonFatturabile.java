@@ -3,6 +3,8 @@ package com.perigea.tracker.timesheet.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -11,11 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "commessa_non_fatturabile")
-public class CommessaNonFatturabile extends Commessa {
+public class CommessaNonFatturabile extends Base {
 
 	@Id
-	@Column(name="codice_commessa")
+	@Column(name="codice_commessa",nullable=false)
 	private String codiceCommessa;
+	
 	
 	@MapsId
 	@OneToOne
@@ -24,6 +27,7 @@ public class CommessaNonFatturabile extends Commessa {
 
 	@Column(name = "descrizione")
 	private String descrizione;
+	
 
 	public Commessa getCommessaNoFatt() {
 		return commessaNonFatturabile;
@@ -40,5 +44,19 @@ public class CommessaNonFatturabile extends Commessa {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
+	public String getCodiceCommessa() {
+		return codiceCommessa;
+	}
+
+	public void setCodiceCommessa(String codiceCommessa) {
+		this.codiceCommessa = codiceCommessa;
+	}
+
+	public Commessa getCommessaNonFatturabile() {
+		return commessaNonFatturabile;
+	}
+	
+	
 
 }
