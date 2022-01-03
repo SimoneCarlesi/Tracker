@@ -1,4 +1,4 @@
-package com.perigea.tracker.timesheet.compositekeys;
+package com.perigea.tracker.timesheet.entity.keys;
 
 import java.io.Serializable;
 import java.util.Objects;

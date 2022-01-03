@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdNotaSpeseKey;
 import com.perigea.tracker.timesheet.entity.NotaSpese;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdNotaSpeseKey;
 
 @Repository
 public interface NotaSpeseRepository extends JpaRepository<NotaSpese, RelazioneIdNotaSpeseKey> {

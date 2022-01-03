@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaKey;
 import com.perigea.tracker.timesheet.entity.OrdineCommessa;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdOrdineCommessaKey;
 
 @Repository
 public interface OrdineCommessaRepository extends JpaRepository<OrdineCommessa, RelazioneIdOrdineCommessaKey> {

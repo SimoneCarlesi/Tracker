@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "anagrafica_dipendente")
-public class AnagraficaDipendente {
+public class AnagraficaDipendente extends Base {
 
 	@Id
 	@Column(name="codice_persona")
@@ -73,18 +73,6 @@ public class AnagraficaDipendente {
 
 	@Column(name = "codice_fiscale")
 	private String codiceFiscale;
-
-	@Column(name = "create_timestamp")
-	private Date createTimestamp;
-
-	@Column(name = "last_update_timestamp")
-	private Date lastUpdateTimestamp;
-
-	@Column(name = "create_user")
-	private String createUser;
-
-	@Column(name = "last_update_user")
-	private String lastUpdateUser;
 
 	public Utente getUtenteDipendente() {
 		return utenteDipendente;
@@ -228,37 +216,5 @@ public class AnagraficaDipendente {
 
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
-	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
-
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public String getLastUpdateUser() {
-		return lastUpdateUser;
-	}
-
-	public void setLastUpdateUser(String lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
 	}
 }

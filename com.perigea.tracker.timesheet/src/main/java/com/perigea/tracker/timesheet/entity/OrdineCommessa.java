@@ -14,12 +14,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdOrdineCommessaKey;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdOrdineCommessaKey;
 
 @Entity
 @IdClass(RelazioneIdOrdineCommessaKey.class)
 @Table(name = "ordine_commessa")
-public class OrdineCommessa{
+public class OrdineCommessa extends Base{
 
 	@Id
 	@Column(name="codice_commessa")
@@ -53,17 +53,6 @@ public class OrdineCommessa{
 	@Column(name = "importo_residuo")
 	private Double importoResiduo;
 
-	@Column(name = "create_timestamp")
-	private Date createTimestamp;
-
-	@Column(name = "last_update_timestamp")
-	private Date lastUpdateTimestamp;
-
-	@Column(name = "create_user")
-	private String createUser;
-
-	@Column(name = "last_update_user")
-	private String lastUpdateUser;
 
 	public CommessaFatturabile getCommessaFatturabile() {
 		return commessaFatturabile;
@@ -127,38 +116,6 @@ public class OrdineCommessa{
 
 	public void setImportoResiduo(Double importoResiduo) {
 		this.importoResiduo = importoResiduo;
-	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
-
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public String getLastUpdateUser() {
-		return lastUpdateUser;
-	}
-
-	public void setLastUpdateUser(String lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
 	}
 
 }

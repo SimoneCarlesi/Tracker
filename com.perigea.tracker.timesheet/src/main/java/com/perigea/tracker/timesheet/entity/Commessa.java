@@ -16,7 +16,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 
 @Entity
 @Table(name="commessa")
-public class Commessa {
+public class Commessa extends Base {
 
 	@Id
 	@Column(name="codice_commessa")
@@ -24,18 +24,6 @@ public class Commessa {
 
 	@Column(name="tipo_commessa")
 	private String commessaType;
-
-	@Column(name="create_timestamp")
-	private Date createTimestamp;
-
-	@Column(name="last_update_timestamp")
-	private Date lastUpdateTimestamp;
-
-	@Column(name="create_user")
-	private String createUser;
-
-	@Column(name="last_update_user")
-	private String lastUpdateUser;
 	
 
 	
@@ -68,38 +56,6 @@ public class Commessa {
 
 	public void setCommessaType(String commessaType) {
 		this.commessaType = commessaType;
-	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
-
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public String getLastUpdateUser() {
-		return lastUpdateUser;
-	}
-
-	public void setLastUpdateUser(String lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
 	}
 
 	public NotaSpese getNotaSpese() {

@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdUtenteRuoloKey;
 import com.perigea.tracker.timesheet.entity.UtenteRuolo;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdUtenteRuoloKey;
 
 @Repository
 public interface UtenteRuoloRepository extends JpaRepository<UtenteRuolo, RelazioneIdUtenteRuoloKey> {

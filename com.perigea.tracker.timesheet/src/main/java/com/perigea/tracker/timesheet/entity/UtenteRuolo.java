@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdUtenteRuoloKey;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdUtenteRuoloKey;
 import com.perigea.tracker.timesheet.enumerator.RuoloType;
 
 @Entity

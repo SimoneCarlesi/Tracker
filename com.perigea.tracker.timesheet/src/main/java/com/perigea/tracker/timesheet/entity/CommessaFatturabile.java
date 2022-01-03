@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "commessa_fatturabile")
-public class CommessaFatturabile {
+public class CommessaFatturabile extends Commessa {
 
 	@Id
 	@Column(name="codice_commessa")

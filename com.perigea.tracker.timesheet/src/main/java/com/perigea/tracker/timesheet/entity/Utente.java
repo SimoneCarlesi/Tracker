@@ -17,7 +17,7 @@ import com.perigea.tracker.timesheet.enumerator.StatoUtenteType;
 
 @Entity
 @Table(name = "utente")
-public class Utente {
+public class Utente extends Base {
 
 	@Id
 	@Column(name = "codice_persona", nullable = false)
@@ -35,23 +35,10 @@ public class Utente {
 	@Column(name = "stato_utente")
 	@Enumerated(EnumType.STRING)
 	private StatoUtenteType statoUtenteType;
-
-	//@ TODO sfruttare ereditarietà di java, metterli in una classe a parte BaseEntity
-	@Column(name = "create_timestamp")
-	private Date createTimestamp;
-
-	@Column(name = "last_update_timestamp")
-	private Date lastUpdateTimestamp;
-
-	@Column(name = "create_user")
-	private String createUser;
-
-	@Column(name = "last_update_user")
-	private String lastUpdateUser;
 	
 
 	@OneToMany(mappedBy = "utenteSpesa")
-	private List<NotaSpese> spese = new ArrayList<>();
+	private List<NotaSpese> noteSpese = new ArrayList<>();
 
 	@OneToOne(mappedBy = "utenteDipendente")
 	private AnagraficaDipendente dipendente;
@@ -60,7 +47,7 @@ public class Utente {
 	private List<TimeSheet> timeSheet = new ArrayList<>();
 
 	@OneToMany(mappedBy = "utente")
-	private List<RelazioneDipendenteCommessa> relazione = new ArrayList<>();
+	private List<RelazioneDipendenteCommessa> relazioneCommessa = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "utente")
 	private List<UtenteRuolo> utenteRuolo = new ArrayList<>();
@@ -105,76 +92,46 @@ public class Utente {
 		this.statoUtenteType = statoUtenteType;
 	}
 
-	public Date getCreateTimestamp() {
-		return createTimestamp;
+	public List<NotaSpese> getNoteSpese() {
+		return noteSpese;
 	}
 
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
+	public void setNoteSpese(List<NotaSpese> noteSpese) {
+		this.noteSpese = noteSpese;
 	}
 
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
+	public AnagraficaDipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
+	public void setDipendente(AnagraficaDipendente dipendente) {
+		this.dipendente = dipendente;
 	}
 
-	public String getCreateUser() {
-		return createUser;
+	public List<TimeSheet> getTimeSheet() {
+		return timeSheet;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setTimeSheet(List<TimeSheet> timeSheet) {
+		this.timeSheet = timeSheet;
 	}
 
-	public String getLastUpdateUser() {
-		return lastUpdateUser;
+	public List<RelazioneDipendenteCommessa> getRelazioneCommessa() {
+		return relazioneCommessa;
 	}
 
-	public void setLastUpdateUser(String lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
+	public void setRelazioneCommessa(List<RelazioneDipendenteCommessa> relazioneCommessa) {
+		this.relazioneCommessa = relazioneCommessa;
 	}
 
-//	public List<NotaSpeseEntity> getSpese() {
-//		return spese;
-//	}
-//
-//	public void setSpese(List<NotaSpeseEntity> spese) {
-//		this.spese = spese;
-//	}
-//
-//	public AnagraficaDipendenteEntity getDipendente() {
-//		return dipendente;
-//	}
-//
-//	public void setDipendente(AnagraficaDipendenteEntity dipendente) {
-//		this.dipendente = dipendente;
-//	}
-//
-//	public List<TimeSheetEntity> getTimeSheet() {
-//		return timeSheet;
-//	}
-//
-//	public void setTimeSheet(List<TimeSheetEntity> timeSheet) {
-//		this.timeSheet = timeSheet;
-//	}
-//
-//	public List<RelazioneDipendenteCommessaEntity> getRelazione() {
-//		return relazione;
-//	}
-//
-//	public void setRelazione(List<RelazioneDipendenteCommessaEntity> relazione) {
-//		this.relazione = relazione;
-//	}
-//
-//	public List<RuoliEntity> getRuoli() {
-//		return ruoli;
-//	}
-//
-//	public void setRuoli(List<RuoliEntity> ruoli) {
-//		this.ruoli = ruoli;
-//	}
+	public List<UtenteRuolo> getUtenteRuolo() {
+		return utenteRuolo;
+	}
+
+	public void setUtenteRuolo(List<UtenteRuolo> utenteRuolo) {
+		this.utenteRuolo = utenteRuolo;
+	}
+
+	
 
 }

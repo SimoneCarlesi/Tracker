@@ -39,14 +39,6 @@ public class Ruoli {
 	public void setDescrizioneRuolo(String descrizioneRuolo) {
 		this.descrizioneRuolo = descrizioneRuolo;
 	}
-
-//	public List<Utente> getUtenti() {
-//		return utenti;
-//	}
-//
-//	public void setUtenti(List<Utente> utenti) {
-//		this.utenti = utenti;
-//	} 
 	
 	
 }

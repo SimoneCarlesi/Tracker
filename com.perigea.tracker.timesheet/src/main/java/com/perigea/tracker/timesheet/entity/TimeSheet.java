@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.perigea.tracker.timesheet.compositekeys.RelazioneIdTimeSheetKey;
+import com.perigea.tracker.timesheet.entity.keys.RelazioneIdTimeSheetKey;
 
 @Entity
 @IdClass(RelazioneIdTimeSheetKey.class)
 @Table(name = "time_sheet")
-public class TimeSheet {
+public class TimeSheet extends Base{
 
 
 	@Id
@@ -52,20 +52,7 @@ public class TimeSheet {
 
 	@Column(name = "stato_time_Sheet")
 	private String statoType;
-
-	@Column(name = "create_timestamp")
-	private Date createTimestamp;
-
-	@Column(name = "last_update_timestamp")
-	private Date lastUpdateTimestamp;
-
-	@Column(name = "create_user")
-	private String createUser;
-
-	@Column(name = "last_update_user")
-	private String lastUpdateUser;
-
-
+	
 	
 	public Integer getAnnoDiRiferimento() {
 		return annoDiRiferimento;
@@ -129,38 +116,6 @@ public class TimeSheet {
 
 	public void setStatoType(String statoType) {
 		this.statoType = statoType;
-	}
-
-	public Date getCreateTimestamp() {
-		return createTimestamp;
-	}
-
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
-
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
-	}
-
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
-	}
-
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public String getLastUpdateUser() {
-		return lastUpdateUser;
-	}
-
-	public void setLastUpdateUser(String lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
 	}
 
 }
