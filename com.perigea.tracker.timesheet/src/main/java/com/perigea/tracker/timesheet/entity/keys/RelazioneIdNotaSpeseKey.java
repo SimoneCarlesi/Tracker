@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 
+import com.perigea.tracker.timesheet.enumerator.TipoCostoNotaSpeseType;
+
 public class RelazioneIdNotaSpeseKey implements Serializable {
 
 	
@@ -28,8 +30,8 @@ public class RelazioneIdNotaSpeseKey implements Serializable {
 	@Column(name="giorno_di_riferimento")
 	private Integer giornoDiRiferimento;
 	
-	@Column(name="tipo_costo_nota_spese_type")
-	private String tipoCostoNotaSpeseType;
+	@Column(name="tipo_costo")
+	private TipoCostoNotaSpeseType tipoCostoNotaSpeseType;
 	
 	public Integer getAnnoDiRiferimento() {
 		return annoDiRiferimento;
@@ -61,17 +63,23 @@ public class RelazioneIdNotaSpeseKey implements Serializable {
 	public void setGiornoDiRiferimento(Integer giornoDiRiferimento) {
 		this.giornoDiRiferimento = giornoDiRiferimento;
 	}
-	public String getTipoCostoNotaSpeseType() {
+	
+	
+	public TipoCostoNotaSpeseType getTipoCostoNotaSpeseType() {
 		return tipoCostoNotaSpeseType;
 	}
-	public void setTipoCostoNotaSpeseType(String tipoCostoNotaSpeseType) {
+	public void setTipoCostoNotaSpeseType(TipoCostoNotaSpeseType tipoCostoNotaSpeseType) {
 		this.tipoCostoNotaSpeseType = tipoCostoNotaSpeseType;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(annoDiRiferimento, codiceCommessa, codicePersona, giornoDiRiferimento, meseDiRiferimento,
 				tipoCostoNotaSpeseType);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

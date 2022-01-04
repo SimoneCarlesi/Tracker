@@ -3,12 +3,12 @@ package com.perigea.tracker.timesheet.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -36,7 +36,12 @@ public class Commessa extends Base {
 	@OneToMany(mappedBy = "commessaTimeSheet")
 	private List<TimeSheet> timeSheet = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "commessaNonFatturabile")
+	@OneToOne(
+	        mappedBy = "commessaNonFatturabile",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true,
+	        fetch = FetchType.LAZY
+			)
 	private CommessaNonFatturabile commessaNonFatturabile;
 	
 	@OneToMany(mappedBy= "commessa")
@@ -44,6 +49,7 @@ public class Commessa extends Base {
 	
 	@OneToOne(mappedBy = "commessaFatturabile")
 	private CommessaFatturabile commessaFatturabile;
+
 
 	public String getCodiceCommessa() {
 		return codiceCommessa;

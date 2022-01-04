@@ -1,15 +1,23 @@
 package com.perigea.tracker.timesheet.service;
 
+import com.perigea.tracker.timesheet.dto.CommessaDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
+import com.perigea.tracker.timesheet.dto.UtenteDto;
+import com.perigea.tracker.timesheet.entity.Commessa;
+import com.perigea.tracker.timesheet.entity.CommessaNonFatturabile;
 
 public interface TrackerCommessaInterface {
 
-	public void createCommessaNonFatturabile(CommessaNonFatturabileDto commessaParam);
+	public CommessaNonFatturabile createCommessaNonFatturabile(CommessaNonFatturabileDto commessaParam,CommessaDto dtoCommessa);
 
-	public void readCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam);
+	public CommessaNonFatturabile readCommessaNonFatturabile(String commessa);
 
-	public void updateCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam);
+	public CommessaNonFatturabileDto updateCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam);
 
-	public void deleteCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam);
+	public void deleteCommessaNonFatturabile(String codiceCommessa);
+	
+	public Commessa createCommessa(CommessaDto dto);
+	
+	public CommessaNonFatturabileDto fromEntityToDto (CommessaNonFatturabile commessa);
 
 }

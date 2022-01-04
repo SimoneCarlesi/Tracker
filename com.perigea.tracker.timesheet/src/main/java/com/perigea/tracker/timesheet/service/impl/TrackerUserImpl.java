@@ -1,9 +1,7 @@
 package com.perigea.tracker.timesheet.service.impl;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,28 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.TrackerController;
-import com.perigea.tracker.timesheet.converter.BodyConverterTimeSheet;
-import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
-import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
-import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
+import com.perigea.tracker.timesheet.dto.GenericDto;
 import com.perigea.tracker.timesheet.dto.RelazioneDipendenteCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
-import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
-import com.perigea.tracker.timesheet.entity.Commessa;
-import com.perigea.tracker.timesheet.entity.CommessaNonFatturabile;
-import com.perigea.tracker.timesheet.entity.OrdineCommessa;
 import com.perigea.tracker.timesheet.entity.RelazioneDipendenteCommessa;
-import com.perigea.tracker.timesheet.entity.Ruoli;
-import com.perigea.tracker.timesheet.entity.TimeSheet;
 import com.perigea.tracker.timesheet.entity.Utente;
-import com.perigea.tracker.timesheet.repository.AnagraficaClienteRepository;
-import com.perigea.tracker.timesheet.repository.CommessaNonFatturabileRepository;
-import com.perigea.tracker.timesheet.repository.OrdineCommessaRepository;
 import com.perigea.tracker.timesheet.repository.RelazioneDipendenteCommessaRepository;
-import com.perigea.tracker.timesheet.repository.RuoliRepository;
-import com.perigea.tracker.timesheet.repository.TimeSheetRepository;
 import com.perigea.tracker.timesheet.repository.UtenteRepository;
 import com.perigea.tracker.timesheet.service.TrackerUserInterface;
 

@@ -34,6 +34,9 @@ public class CommessaFatturabileDto extends CommessaDto {
 	public CommessaFatturabileDto() {
 		super();
 	}
+	
+
+
 
 	public String getDescrizioneCommessaPerigea() {
 		return descrizioneCommessaPerigea;

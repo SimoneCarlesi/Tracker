@@ -54,10 +54,10 @@ public class AnagraficaCliente extends Base {
 	@Column(name = "progressivo_per_commesse")
 	private Integer progressivoPerCommesse;
 
-	@Column(name = "tipologia_pagamento")
+	@Column(name = "tipologia_di_pagamento")
 	private String tipologiaPagamentoType;
 
-	@Column(name = "nota_per_la_fatturazione")
+	@Column(name = "note_per_la_fatturazione")
 	private String notePerLaFatturazione;
 
 

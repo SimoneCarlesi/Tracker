@@ -18,7 +18,8 @@ public class CommessaNonFatturabileDto extends CommessaDto {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
+
+
 	
 
 }

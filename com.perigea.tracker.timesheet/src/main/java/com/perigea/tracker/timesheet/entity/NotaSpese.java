@@ -1,10 +1,9 @@
 package com.perigea.tracker.timesheet.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -14,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.perigea.tracker.timesheet.entity.keys.RelazioneIdNotaSpeseKey;
+import com.perigea.tracker.timesheet.enumerator.TipoCostoNotaSpeseType;
 
 @Entity
 @IdClass(RelazioneIdNotaSpeseKey.class)
@@ -52,7 +52,8 @@ public class NotaSpese extends Base {
 
 	@Id
 	@Column(name = "tipo_costo")
-	private String tipoCostoNotaSpeseType;
+	@Enumerated(EnumType.STRING)
+	private TipoCostoNotaSpeseType tipoCostoNotaSpeseType;
 
 	@Column(name = "importo")
 	private Double importo;
@@ -97,13 +98,6 @@ public class NotaSpese extends Base {
 		this.giornoDiRiferimento = giornoDiRiferimento;
 	}
 
-	public String getTipoCostoNotaSpeseType() {
-		return tipoCostoNotaSpeseType;
-	}
-
-	public void setTipoCostoNotaSpeseType(String tipoCostoNotaSpeseType) {
-		this.tipoCostoNotaSpeseType = tipoCostoNotaSpeseType;
-	}
 
 	public Double getImporto() {
 		return importo;
@@ -112,6 +106,32 @@ public class NotaSpese extends Base {
 	public void setImporto(Double importo) {
 		this.importo = importo;
 	}
+
+	public String getCodicePersona() {
+		return codicePersona;
+	}
+
+	public void setCodicePersona(String codicePersona) {
+		this.codicePersona = codicePersona;
+	}
+
+	public String getCodiceCommessa() {
+		return codiceCommessa;
+	}
+
+	public void setCodiceCommessa(String codiceCommessa) {
+		this.codiceCommessa = codiceCommessa;
+	}
+
+	public TipoCostoNotaSpeseType getTipoCostoNotaSpeseType() {
+		return tipoCostoNotaSpeseType;
+	}
+
+	public void setTipoCostoNotaSpeseType(TipoCostoNotaSpeseType tipoCostoNotaSpeseType) {
+		this.tipoCostoNotaSpeseType = tipoCostoNotaSpeseType;
+	}
+	
+	
 
 
 }

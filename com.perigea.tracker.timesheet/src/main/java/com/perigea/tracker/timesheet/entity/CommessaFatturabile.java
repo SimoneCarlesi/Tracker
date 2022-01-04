@@ -2,14 +2,19 @@ package com.perigea.tracker.timesheet.entity;
 
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.perigea.tracker.timesheet.enumerator.TipoCommessaFatturabileType;
 
 @Entity
 @Table(name = "commessa_fatturabile")
@@ -36,6 +41,10 @@ public class CommessaFatturabile extends Base {
 
 	@Column(name = "data_inizio_commessa")
 	private Date dataInizioCommessa;
+	
+	@Column(name = "tipo_commessa")
+	@Enumerated(EnumType.STRING)
+	private TipoCommessaFatturabileType tipoCommessaFatturabileType;
 
 	@Column(name = "data_fine_commessa")
 	private Date dataFineCommessa;
@@ -67,10 +76,10 @@ public class CommessaFatturabile extends Base {
 	@Column(name = "totale_costi_da_inizio_anno")
 	private Double totaleCostiDaInizioAnno;
 
-	@Column(name = "totale<-fatturato_da_inizio_commessa")
+	@Column(name = "totale_fatturato_da_inizio_commessa")
 	private Double totaleFatturatoreDaInizioCommessa;
 
-	@Column(name = "totale_fatturatoo_da_inizio_anno")
+	@Column(name = "totale_fatturato_da_inizio_anno")
 	private Double totaleFatturatoDaInizioAnno;
 
 	@Column(name = "margine_iniziale")
@@ -100,6 +109,44 @@ public class CommessaFatturabile extends Base {
 	public Commessa getCommessaFat() {
 		return commessaFatturabile;
 	}
+	
+	
+
+	public String getCodiceCommessa() {
+		return codiceCommessa;
+	}
+
+
+
+	public void setCodiceCommessa(String codiceCommessa) {
+		this.codiceCommessa = codiceCommessa;
+	}
+
+
+
+	public Commessa getCommessaFatturabile() {
+		return commessaFatturabile;
+	}
+
+
+
+	public void setCommessaFatturabile(Commessa commessaFatturabile) {
+		this.commessaFatturabile = commessaFatturabile;
+	}
+
+
+
+	public TipoCommessaFatturabileType getTipoCommessaFatturabileType() {
+		return tipoCommessaFatturabileType;
+	}
+
+
+
+	public void setTipoCommessaFatturabileType(TipoCommessaFatturabileType tipoCommessaFatturabileType) {
+		this.tipoCommessaFatturabileType = tipoCommessaFatturabileType;
+	}
+
+
 
 	public void setCommessaFat(Commessa commessaFat) {
 		this.commessaFatturabile = commessaFat;
