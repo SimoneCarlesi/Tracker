@@ -16,6 +16,7 @@ import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.entity.RelazioneDipendenteCommessa;
 import com.perigea.tracker.timesheet.entity.Utente;
+import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.RelazioneDipendenteCommessaRepository;
 import com.perigea.tracker.timesheet.repository.UtenteRepository;
 import com.perigea.tracker.timesheet.service.TrackerUserInterface;
@@ -41,24 +42,18 @@ public class TrackerUserImpl implements TrackerUserInterface {
 	//@ TODO creare una classe utility per l'UUID
 	//Metodo per creare un nuovo utente per poi inserirlo a database
 	public UtenteDto createUser(UtenteDto userParam){
-		Utente user=new Utente();
-		user.setCodicePersona(UUID.randomUUID().toString());
-		user.setNome(userParam.getNome());
-		user.setCognome(userParam.getCognome());
-		user.setPassword(userParam.getPassword());
-		user.setStatoUtenteType(userParam.getStatoUtenteType());
-		user.setCreateUser("");
+		Utente user = DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(userParam);
 		LOGGER.info("Utente creato");
 		userRepo.save(user);
 		LOGGER.info("Utente salvato a database");
-		UtenteDto dto=fromEntityToDto(user);
+		UtenteDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoUtente(user);
 		return dto;
 	}
 
 	//Metodo per leggere i dati di un determinato utente
 	public UtenteDto readUser(String userParam) {
 		Utente entity=userRepo.findByCodicePersona(userParam);
-		UtenteDto dto=fromEntityToDto(entity);
+		UtenteDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoUtente(entity);
 		return dto;
 	}
 
@@ -66,14 +61,10 @@ public class TrackerUserImpl implements TrackerUserInterface {
 	public UtenteDto updateUser(UtenteDto userParam) {
 		Utente entity=userRepo.findByCodicePersona(userParam.getCodicePersona());
 		if(entity != null) {
-			entity.setCognome(userParam.getCognome());
-			entity.setNome(userParam.getCognome());
-			entity.setLastUpdateUser("");
-			entity.setPassword(userParam.getPassword());
-			entity.setStatoUtenteType(userParam.getStatoUtenteType());
+			entity = DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(userParam);
 			userRepo.save(entity);
 		}
-		UtenteDto dto=fromEntityToDto(entity);
+		UtenteDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoUtente(entity);
 		return dto;
 	}
 
@@ -99,7 +90,7 @@ public class TrackerUserImpl implements TrackerUserInterface {
 		} else {
 			LOGGER.info("CodicePersona non trovato");
 		}
-		UtenteDto dto=fromEntityToDto(entity);
+		UtenteDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoUtente(entity);
 		return dto;
 	}
 
@@ -136,7 +127,8 @@ public class TrackerUserImpl implements TrackerUserInterface {
 
 
 	public void createRelazioneDipendenteCommessa(RelazioneDipendenteCommessaDto dtoParam) {
-		RelazioneDipendenteCommessa entity = new RelazioneDipendenteCommessa();
+		RelazioneDipendenteCommessa entity = DtoEntityMapper.INSTANCE
+				.fromDtoToEntityRelazioneDipendenteCommessa(dtoParam);
 		Date date=new Date();
 		//			entity.setCommessa(dtoParam.getCodiceCommessa());
 		//			entity.setUtente(dtoParam.getCodicePersona());
@@ -155,19 +147,6 @@ public class TrackerUserImpl implements TrackerUserInterface {
 		entity.setLastUpdateUser("");
 		relazioneDipComRepo.save(entity);
 		LOGGER.info("Relazione Dipendente-commessa creata e salvata a database");
-	}
-
-
-	public UtenteDto fromEntityToDto(Utente entity) {
-		UtenteDto dto=new UtenteDto();
-		dto.setCodicePersona(entity.getCodicePersona());
-		dto.setNome(entity.getNome());
-		dto.setCognome(entity.getCognome());
-		dto.setPassword(entity.getPassword());
-		dto.setStatoUtenteType(entity.getStatoUtenteType());
-		dto.setCreateUser("");
-		return dto;
-
 	}
 
 }

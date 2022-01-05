@@ -12,12 +12,14 @@ import com.perigea.tracker.timesheet.controller.TrackerUserController;
 import com.perigea.tracker.timesheet.converter.CommessaFatturabileWrapper;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
+import com.perigea.tracker.timesheet.dto.CommessaFatturabileDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
 import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.CommessaFatturabile;
 import com.perigea.tracker.timesheet.entity.CommessaNonFatturabile;
 import com.perigea.tracker.timesheet.entity.OrdineCommessa;
+import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.CommessaFatturabileRepository;
 import com.perigea.tracker.timesheet.repository.CommessaNonFatturabileRepository;
 import com.perigea.tracker.timesheet.repository.CommessaRepository;
@@ -47,7 +49,7 @@ public class TrackerCommessaImpl implements TrackerCommessaInterface {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
 	
 	//@ TODO fare
-	public CommessaFatturabile createCommessaFatturabile(CommessaFatturabileWrapper bodyConverter) {
+	public CommessaFatturabileDto createCommessaFatturabile(CommessaFatturabileWrapper bodyConverter) {
 		CommessaFatturabile entity=new CommessaFatturabile();
 		
 		//AnagraficaCliente relazionata
@@ -55,7 +57,8 @@ public class TrackerCommessaImpl implements TrackerCommessaInterface {
 		AnagraficaCliente anaEntity=trackerClient.fromDtoToEntity(ana);
 		entity.setRagioneSociale(anaEntity);
 		//Commessa relazionata
-		Commessa commessa=createCommessa(bodyConverter.getDtoCommessa());
+		CommessaDto commessaDto=createCommessa(bodyConverter.getDtoCommessa());
+		Commessa commessa=DtoEntityMapper.INSTANCE.fromDtoToEntityCommessa(commessaDto);
 		entity.setCommessaFatturabile(commessa);
 		commessa.setCommessaFatturabile(entity);
 		
@@ -86,27 +89,30 @@ public class TrackerCommessaImpl implements TrackerCommessaInterface {
 		entity.setTotaleRicaviDaInizioCommessa(bodyConverter.getCommessaFatturabileDto().getTotaleRicaviDaInizioCommessa());
 		commessaFatturabileRepo.save(entity);
 		LOGGER.info("CommessaFatturabile creata e salvata a database");
-		return entity;
+		CommessaFatturabileDto dto=fromEntityToDtoCommessaFatturabile(entity);
+		return dto;
 	}
 	
-	public CommessaNonFatturabile createCommessaNonFatturabile(CommessaNonFatturabileDto dto,CommessaDto dtoCommessa) {
+	public CommessaNonFatturabileDto createCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam,CommessaDto dtoCommessa) {
 		CommessaNonFatturabile entity=new CommessaNonFatturabile();
-		Commessa commessa=createCommessa(dtoCommessa);
+		CommessaDto commessaDto=createCommessa(dtoCommessa);
+		Commessa commessa=DtoEntityMapper.INSTANCE.fromDtoToEntityCommessa(commessaDto);
 		entity.setCommessaNonFatturabile(commessa);
 		entity.setCreateUser("");
-		entity.setDescrizione(dto.getDescrizione());
+		entity.setDescrizione(dtoParam.getDescrizione());
 		commessa.setCommessaNonFatturabile(entity);
 		commessaNonFatturabileRepo.save(entity);
-		return entity;
+		CommessaNonFatturabileDto dto=fromEntityToDtoCommessaNonFatturabile(entity);
+		return dto;
 	}
 	
-	public Commessa createCommessa(CommessaDto dto) {
+	public CommessaDto createCommessa(CommessaDto dto) {
 		Commessa entity= new Commessa();
 		entity.setCodiceCommessa(UUID.randomUUID().toString());
 		entity.setCommessaType(dto.getTipoCommessaType());
 		entity.setCreateUser("");
 		entity.setCommessaType(dto.getTipoCommessaType());
-		return entity;
+		return dto;
 	}
 	
 	public void deleteCommessa(String codiceCommessa) {
@@ -129,7 +135,7 @@ public class TrackerCommessaImpl implements TrackerCommessaInterface {
 			entity.setLastUpdateUser("");
 			commessaNonFatturabileRepo.save(entity);
 		}
-		CommessaNonFatturabileDto dto=fromEntityToDto(entity);
+		CommessaNonFatturabileDto dto=fromEntityToDtoCommessaNonFatturabile(entity);
 		return dto;
 	}
 
@@ -140,16 +146,79 @@ public class TrackerCommessaImpl implements TrackerCommessaInterface {
 		}
 	}
 	
-	public CommessaNonFatturabileDto fromEntityToDto(CommessaNonFatturabile entity) {
+	public CommessaNonFatturabileDto fromEntityToDtoCommessaNonFatturabile(CommessaNonFatturabile entity) {
 		CommessaNonFatturabileDto dto=new CommessaNonFatturabileDto();
 		dto.setCodiceCommessa(entity.getCodiceCommessa());
 		dto.setDescrizione(entity.getDescrizione());
 		return dto;
 	}
+	
+	public CommessaFatturabileDto fromEntityToDtoCommessaFatturabile(CommessaFatturabile entity) {
+		CommessaFatturabileDto dto=new CommessaFatturabileDto();
+		dto.setCodiceCommessa(entity.getCodiceCommessa());
+		entity.setCreateUser("");
+		Date date=new Date();
+		entity.setDataInizioCommessa(date);
+		entity.setTipoCommessaFatturabileType(entity.getTipoCommessa());
+		entity.setDataFineCommessa(entity.getDataFineCommessa());
+		entity.setImportoCommessaInizialePresunto(entity.getImportoCommessaInizialePresunto());
+		entity.setDescrizioneCommessaCliente(entity.getDescrizioneCommessaCliente());
+		entity.setDescrizioneCommessaPerigea(entity.getDescrizioneCommessaPerigea());
+		entity.setMargineDaInizioAnno(entity.getMargineDaInizioAnno());
+		entity.setMargineDaInizioCommessa(entity.getMargineDaInizioCommessa());
+		entity.setMargineIniziale(entity.getMargineIniziale());
+		entity.setOrdineInternoCorrente(entity.getOrdineInternoCorrente());
+		entity.setResponsabileCommerciale(entity.getResponsabileCommerciale());
+		entity.setPercentualeAvanzamentoCosti(entity.getPercentualeAvanzamentoCosti());
+		entity.setPercentualeAvanzamentoFatturazione(entity.getPercentualeAvanzamentoFatturazione());
+		entity.setPercentualeSconto(entity.getPercentualeSconto());
+		entity.setTotaleCostiDaInizioAnno(entity.getTotaleCostiDaInizioAnno());
+		entity.setTotaleCostiDaInizioCommessa(entity.getTotaleCostiDaInizioCommessa());
+		entity.setTotaleEstensioni(entity.getTotaleEstensioni());
+		entity.setTotaleFatturatoDaInizioAnno(entity.getTotaleFatturatoDaInizioAnno());
+		entity.setTotaleFatturatoreDaInizioCommessa(entity.getTotaleFatturatoreDaInizioCommessa());
+		entity.setTotaleOrdine(entity.getTotaleOrdine());
+		entity.setTotaleOrdineClienteFormale(entity.getTotaleOrdineClienteFormale());
+		entity.setTotaleRicaviDaInizioAnno(entity.getTotaleRicaviDaInizioAnno());
+		entity.setTotaleRicaviDaInizioCommessa(entity.getTotaleRicaviDaInizioCommessa());
+		return dto;
+	}
+	
+	public CommessaFatturabileDto fromDtoToEntityCommessaFatturabile(CommessaFatturabile entity) {
+		CommessaFatturabileDto dto=new CommessaFatturabileDto();
+		dto.setCodiceCommessa(entity.getCodiceCommessa());
+		entity.setCreateUser("");
+		Date date=new Date();
+		entity.setDataInizioCommessa(date);
+		entity.setTipoCommessaFatturabileType(entity.getTipoCommessa());
+		entity.setDataFineCommessa(entity.getDataFineCommessa());
+		entity.setImportoCommessaInizialePresunto(entity.getImportoCommessaInizialePresunto());
+		entity.setDescrizioneCommessaCliente(entity.getDescrizioneCommessaCliente());
+		entity.setDescrizioneCommessaPerigea(entity.getDescrizioneCommessaPerigea());
+		entity.setMargineDaInizioAnno(entity.getMargineDaInizioAnno());
+		entity.setMargineDaInizioCommessa(entity.getMargineDaInizioCommessa());
+		entity.setMargineIniziale(entity.getMargineIniziale());
+		entity.setOrdineInternoCorrente(entity.getOrdineInternoCorrente());
+		entity.setResponsabileCommerciale(entity.getResponsabileCommerciale());
+		entity.setPercentualeAvanzamentoCosti(entity.getPercentualeAvanzamentoCosti());
+		entity.setPercentualeAvanzamentoFatturazione(entity.getPercentualeAvanzamentoFatturazione());
+		entity.setPercentualeSconto(entity.getPercentualeSconto());
+		entity.setTotaleCostiDaInizioAnno(entity.getTotaleCostiDaInizioAnno());
+		entity.setTotaleCostiDaInizioCommessa(entity.getTotaleCostiDaInizioCommessa());
+		entity.setTotaleEstensioni(entity.getTotaleEstensioni());
+		entity.setTotaleFatturatoDaInizioAnno(entity.getTotaleFatturatoDaInizioAnno());
+		entity.setTotaleFatturatoreDaInizioCommessa(entity.getTotaleFatturatoreDaInizioCommessa());
+		entity.setTotaleOrdine(entity.getTotaleOrdine());
+		entity.setTotaleOrdineClienteFormale(entity.getTotaleOrdineClienteFormale());
+		entity.setTotaleRicaviDaInizioAnno(entity.getTotaleRicaviDaInizioAnno());
+		entity.setTotaleRicaviDaInizioCommessa(entity.getTotaleRicaviDaInizioCommessa());
+		return dto;
+	}
 
 	public OrdineCommessa createOrdineCommessa (CommessaFatturabileWrapper bodyConverter) {
 		OrdineCommessa entity = new OrdineCommessa();
-		CommessaFatturabile commessaFatturabile=createCommessaFatturabile(bodyConverter);
+		CommessaFatturabileDto commessaFatturabileDto=createCommessaFatturabile(bodyConverter);
+		CommessaFatturabile entity=fromDtoToEntity(commessaFatturabileDto);
 		entity.setCommessaFatturabile(commessaFatturabile);
 		commessaFatturabile.setOrdineCommessa(entity);
 		entity.setCreateUser("");

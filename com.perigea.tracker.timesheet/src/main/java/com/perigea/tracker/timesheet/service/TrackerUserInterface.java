@@ -29,5 +29,4 @@ public interface TrackerUserInterface {
 	
 	public void createRelazioneDipendenteCommessa(RelazioneDipendenteCommessaDto dtoParam);
 	
-	public UtenteDto fromEntityToDto (Utente entity);
 }

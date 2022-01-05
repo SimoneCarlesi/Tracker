@@ -52,9 +52,15 @@ public class TrackerUserController {
 
 	// Metodo per leggere un utente
 	@GetMapping(value = "/read-user")
-	public ResponseEntity <?> readUser(@RequestParam String codicePersona) {
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> readUser(@RequestParam String codicePersona,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		UtenteDto dto=userService.readUser(codicePersona);
-		return ResponseEntity.ok().body(dto);
+		Date date=new Date();
+		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per cancellare un utente
@@ -66,16 +72,28 @@ public class TrackerUserController {
 
 	// Metodo per aggiornare un utente
 	@PostMapping(value = "/update-user")
-	public ResponseEntity <?> updateUser(@RequestBody UtenteDto dtoParam) {
+	public ResponseEntity <?> updateUser(@RequestBody UtenteDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		UtenteDto dto=userService.updateUser(dtoParam);
-		return ResponseEntity.ok().body(dto);
+		Date date=new Date();
+		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per aggiornare lo status di un utente
 	@PostMapping(value = "/edit-status-user")
-	public ResponseEntity <?> editStatusUser(@RequestBody UtenteDto dtoParam) {
+	public ResponseEntity <?> editStatusUser(@RequestBody UtenteDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		UtenteDto dto=userService.editStatusUser(dtoParam);
-		return ResponseEntity.ok().body(dto);
+		Date date=new Date();
+		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 

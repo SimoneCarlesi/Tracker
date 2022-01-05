@@ -11,7 +11,7 @@ import com.perigea.tracker.timesheet.entity.OrdineCommessa;
 
 public interface TrackerCommessaInterface {
 
-	public CommessaNonFatturabile createCommessaNonFatturabile(CommessaNonFatturabileDto commessaParam,CommessaDto dtoCommessa);
+	public CommessaNonFatturabileDto createCommessaNonFatturabile(CommessaNonFatturabileDto commessaParam,CommessaDto dtoCommessa);
 
 	public CommessaNonFatturabile readCommessaNonFatturabile(String commessa);
 
@@ -21,7 +21,7 @@ public interface TrackerCommessaInterface {
 	
 	public Commessa createCommessa(CommessaDto dto);
 	
-	public CommessaNonFatturabileDto fromEntityToDto (CommessaNonFatturabile commessa);
+	public CommessaNonFatturabileDto fromEntityToDtoCommessaNonFatturabile (CommessaNonFatturabile commessa);
 	
 	public OrdineCommessa createOrdineCommessa (CommessaFatturabileWrapper bodyConverter);
 

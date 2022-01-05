@@ -7,8 +7,8 @@ import com.perigea.tracker.timesheet.entity.Utente;
 
 public interface TrackerTimeSheetInterface {
 
-	public void createTimeSheet( TimeSheetWrapper bodyConverter);
+	public TimeSheetDto createTimeSheet(Utente utente,Commessa commessa,TimeSheetDto timeSheetParam);
 
-	public void editTimeSheet(TimeSheetDto timeSheetParam, Commessa commessa, Utente utente);
+	public TimeSheetDto editTimeSheet(TimeSheetDto timeSheetParam, Commessa commessa, Utente utente);
 
 }

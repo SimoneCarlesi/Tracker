@@ -8,7 +8,7 @@ import com.perigea.tracker.timesheet.entity.Utente;
 
 public interface TrackerRoleInterface {
 
-	public void createRole(RuoliDto role);
+	public RuoliDto createRole(RuoliDto role);
 
 	public RuoliDto readRole(String role);
 
@@ -16,6 +16,5 @@ public interface TrackerRoleInterface {
 
 	public void deleteRole(String role);
 	
-	public RuoliDto fromEntityToDto (Ruoli entity);
 
 }

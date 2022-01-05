@@ -9,13 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.TrackerUserController;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
-import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
-import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
-import com.perigea.tracker.timesheet.entity.OrdineCommessa;
-import com.perigea.tracker.timesheet.entity.Utente;
+import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.AnagraficaClienteRepository;
-import com.perigea.tracker.timesheet.repository.OrdineCommessaRepository;
 import com.perigea.tracker.timesheet.service.TrackerClientInterface;
 
 @Service
@@ -83,39 +79,14 @@ public class TrackerClientImpl implements TrackerClientInterface {
 	}
 	
 	public AnagraficaClienteDto fromEntityToDto(AnagraficaCliente entity) {
-		AnagraficaClienteDto dto=new AnagraficaClienteDto();
-		dto.setAcronimoCliente(entity.getAcronimoCliente());
-		dto.setCodiceDestinatario(entity.getCodiceDestinatario());
-		dto.setCodiceFiscale(entity.getCodiceFiscale());
-		dto.setNotePerLaFatturazione(entity.getNotePerLaFatturazione());
-		dto.setPartitaIva(entity.getPartitaIva());
-		dto.setProgressivoPerCommesse(entity.getProgressivoPerCommesse());
-		dto.setRagioneSocialeCliente(entity.getRagioneSocialeCliente());
-		dto.setSedeLegaleCap(entity.getSedeLegaleCap());
-		dto.setSedeLegaleComune(entity.getSedeLegaleComune());
-		dto.setSedeLegaleIndirizzo(entity.getSedeLegaleIndirizzo());
-		dto.setSedeOperativaCap(entity.getSedeOperativaCap());
-		dto.setSedeOperativaComune(entity.getSedeOperativaComune());
-		dto.setSedeOperativaIndirizzo(entity.getSedeOperativaIndirizzo());
-		dto.setCreateUser("");
+		AnagraficaClienteDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoAnagraficaCliente(entity);
+//		dto.setCreateUser("");
 		return dto;
 	}
-	
+
 	public AnagraficaCliente fromDtoToEntity(AnagraficaClienteDto dto) {
-		AnagraficaCliente entity=new AnagraficaCliente();
-		entity.setAcronimoCliente(dto.getAcronimoCliente());
-		entity.setCodiceDestinatario(dto.getCodiceDestinatario());
-		entity.setCodiceFiscale(dto.getCodiceFiscale());
-		entity.setNotePerLaFatturazione(dto.getNotePerLaFatturazione());
-		entity.setPartitaIva(dto.getPartitaIva());
-		entity.setRagioneSocialeCliente(dto.getRagioneSocialeCliente());
-		entity.setSedeLegaleCap(dto.getSedeLegaleCap());
-		entity.setSedeLegaleComune(dto.getSedeLegaleComune());
-		entity.setSedeLegaleIndirizzo(dto.getSedeLegaleIndirizzo());
-		entity.setSedeOperativaCap(dto.getSedeOperativaCap());
-		entity.setSedeOperativaComune(dto.getSedeOperativaComune());
-		entity.setSedeOperativaIndirizzo(dto.getSedeOperativaIndirizzo());
-		entity.setCreateUser("");
+		AnagraficaCliente entity = DtoEntityMapper.INSTANCE.fromDtoToEntityAnagraficaCliente(dto);
+//		entity.setCreateUser("");
 		return entity;
 	}
 	

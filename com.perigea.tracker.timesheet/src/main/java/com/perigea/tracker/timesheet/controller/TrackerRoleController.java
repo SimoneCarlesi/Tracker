@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
+import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.service.impl.TrackerRoleImpl;
 
@@ -20,16 +24,28 @@ public class TrackerRoleController {
 
 	// Metodo per creare un ruolo
 	@PostMapping(value = "/create-role")
-	public ResponseEntity <?> createRole(@RequestBody RuoliDto dto) {
-		roleService.createRole(dto);
-		return ResponseEntity.ok("Ruolo creato");
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> createRole(@RequestBody RuoliDto dtoParam,  @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+		RuoliDto dto= roleService.createRole(dtoParam);
+		Date date=new Date();
+		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per leggere un ruolo
 	@GetMapping(value = "/read-role")
-	public ResponseEntity <?> readRole(@RequestParam String roleName) {
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> readRole(@RequestParam String roleName,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		RuoliDto dto=roleService.readRole(roleName);
-		return ResponseEntity.ok().body(dto);
+		Date date=new Date();
+		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per cancellare un ruolo
@@ -41,9 +57,15 @@ public class TrackerRoleController {
 
 	// Metodo per aggiornare un ruolo
 	@PostMapping(value = "/update-role")
-	public ResponseEntity <?> updateRole(@RequestBody RuoliDto dtoParam) {
+	public ResponseEntity <?> updateRole(@RequestBody RuoliDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		RuoliDto dto=roleService.updateRole(dtoParam);
-		return ResponseEntity.ok().body(dto);
+		Date date=new Date();
+		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 }

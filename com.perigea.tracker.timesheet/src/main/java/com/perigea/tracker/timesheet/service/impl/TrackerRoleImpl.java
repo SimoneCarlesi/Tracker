@@ -12,6 +12,7 @@ import com.perigea.tracker.timesheet.converter.EnumConverter;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.entity.Ruoli;
 import com.perigea.tracker.timesheet.enumerator.RuoloType;
+import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.RuoliRepository;
 import com.perigea.tracker.timesheet.service.TrackerRoleInterface;
 
@@ -24,19 +25,19 @@ public class TrackerRoleImpl implements TrackerRoleInterface{
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
 
 	//Metodo per creare un nuovo ruolo
-	public void createRole(RuoliDto roleParam) {
-		Ruoli role=new Ruoli();
-		role.setDescrizioneRuolo(roleParam.getDescrizioneRuolo());
-		role.setRuoloType(roleParam.getRuoloType().toString());
+	public RuoliDto createRole(RuoliDto roleParam) {
+		Ruoli role = DtoEntityMapper.INSTANCE.fromDtoToEntityRuoli(roleParam);
 		LOGGER.info("Role creato");
 		roleRepo.save(role);
 		LOGGER.info("Role aggiunto a database");
+		RuoliDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoRuoli(role);
+		return dto;
 	}
 
 	//Metodo per leggere le informazioni specifiche di un ruolo
 	public RuoliDto readRole(String roleParam) {
 		Ruoli entity=roleRepo.findByRuoloType(roleParam);
-		RuoliDto dto=fromEntityToDto(entity);
+		RuoliDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoRuoli(entity);
 		return dto;
 	}
 
@@ -45,11 +46,10 @@ public class TrackerRoleImpl implements TrackerRoleInterface{
 		Ruoli entity=roleRepo.findByRuoloType(roleParam.getRuoloType().toString());	
 		if(entity != null) {
 			roleRepo.delete(entity);
-			entity.setDescrizioneRuolo(roleParam.getDescrizioneRuolo());
-			entity.setRuoloType(roleParam.getRuoloType().toString());
+			entity = DtoEntityMapper.INSTANCE.fromDtoToEntityRuoli(roleParam);
 			roleRepo.save(entity);
 		}
-		RuoliDto dto=fromEntityToDto(entity);
+		RuoliDto dto = DtoEntityMapper.INSTANCE.fromEntityToDtoRuoli(entity);
 		return dto;
 	}
 
@@ -65,13 +65,4 @@ public class TrackerRoleImpl implements TrackerRoleInterface{
 		}
 	}
 	
-	public RuoliDto fromEntityToDto(Ruoli entity) {
-		RuoliDto dto=new RuoliDto();
-		dto.setDescrizioneRuolo(entity.getDescrizioneRuolo());
-		EnumConverter enumConverter=new EnumConverter();
-		RuoloType ruolo=enumConverter.fromStringToEnum(entity);
-		dto.setRuoloType(ruolo);
-		return dto;
-	}
-
 }
