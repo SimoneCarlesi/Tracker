@@ -3,6 +3,8 @@ package com.perigea.tracker.timesheet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
+
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication

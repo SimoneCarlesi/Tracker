@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
+import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.service.impl.TrackerClientImpl;
 
 @RestController
@@ -22,11 +23,12 @@ public class TrackerAnagraficaClienteController {
 	@PostMapping(value = "/createAnagraficaCliente")
 	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		AnagraficaClienteDto dto=commessaService.createCustomerPersonalData(dtoParam);
-		GenericWrapperResponse<AnagraficaClienteDto> genericDto=new GenericWrapperResponse<>();
 		Date date=new Date();
-		genericDto.setDataRichiesta(date);
-		genericDto.setUtenteModifica(nomeModifica+ " " + cognomeModifica);
-		genericDto.setRisultato(dto);
+		GenericWrapperResponse<AnagraficaClienteDto>genericDto=GenericWrapperResponse.<AnagraficaClienteDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
 		return ResponseEntity.ok(genericDto);
 	}
 }

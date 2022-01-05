@@ -50,11 +50,12 @@ public class TrackerController {
 	@PostMapping(value = "/createUser")
 	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		UtenteDto dto=userService.createUser(dtoParam);
-		GenericWrapperResponse<UtenteDto> genericDto=new GenericWrapperResponse<>();
 		Date date=new Date();
-		genericDto.setDataRichiesta(date);
-		genericDto.setUtenteModifica(nomeModifica+ " " + cognomeModifica);
-		genericDto.setRisultato(dto);
+		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato(dto)
+				.build();
 		return ResponseEntity.ok(genericDto);
 	}
 
