@@ -15,12 +15,12 @@ import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.service.impl.TrackerClientImpl;
 
 @RestController
-public class TrackerAnagraficaClienteController {
+public class TrackerClientController {
 
 	@Autowired
 	private TrackerClientImpl commessaService;
 	
-	@PostMapping(value = "/createAnagraficaCliente")
+	@PostMapping(value = "/create-anagrafica-cliente")
 	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		AnagraficaClienteDto dto=commessaService.createCustomerPersonalData(dtoParam);
 		Date date=new Date();

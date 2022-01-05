@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerController;
+import com.perigea.tracker.timesheet.controller.TrackerUserController;
 import com.perigea.tracker.timesheet.dto.RelazioneDipendenteCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
@@ -33,7 +33,7 @@ public class TrackerUserImpl implements TrackerUserInterface {
 
 	//@ TODO controllare spring security.
 	//@ TODO parametri di autenticazione con le chiamate rest
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
 
 
 	//Metodo per accedere con le proprie credenziali al database per tenere traccia di chi effettua cambiamenti

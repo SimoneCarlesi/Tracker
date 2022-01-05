@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerController;
+import com.perigea.tracker.timesheet.controller.TrackerUserController;
 import com.perigea.tracker.timesheet.converter.TimeSheetWrapper;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.entity.Commessa;
@@ -22,7 +22,7 @@ public class TrackerTimeSheetImpl implements TrackerTimeSheetInterface{
 	@Autowired
 	private TimeSheetRepository timeSheetRepo;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
 
 	public void createTimeSheet( TimeSheetWrapper bodyConverter) {
 		TimeSheet timeSheetEntity= new TimeSheet();

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerController;
+import com.perigea.tracker.timesheet.controller.TrackerUserController;
 import com.perigea.tracker.timesheet.converter.EnumConverter;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.entity.Ruoli;
@@ -21,7 +21,7 @@ public class TrackerRoleImpl implements TrackerRoleInterface{
 	@Autowired
 	private RuoliRepository roleRepo;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
 
 	//Metodo per creare un nuovo ruolo
 	public void createRole(RuoliDto roleParam) {
