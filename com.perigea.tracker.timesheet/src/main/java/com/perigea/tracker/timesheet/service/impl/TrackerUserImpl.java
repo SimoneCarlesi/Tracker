@@ -2,6 +2,7 @@ package com.perigea.tracker.timesheet.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.TrackerController;
-import com.perigea.tracker.timesheet.dto.GenericDto;
 import com.perigea.tracker.timesheet.dto.RelazioneDipendenteCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
@@ -38,10 +38,11 @@ public class TrackerUserImpl implements TrackerUserInterface {
 
 	//Metodo per accedere con le proprie credenziali al database per tenere traccia di chi effettua cambiamenti
 
+	//@ TODO creare una classe utility per l'UUID
 	//Metodo per creare un nuovo utente per poi inserirlo a database
-	public void createUser(UtenteDto userParam){
+	public UtenteDto createUser(UtenteDto userParam){
 		Utente user=new Utente();
-		user.setCodicePersona(userParam.getCodicePersona());
+		user.setCodicePersona(UUID.randomUUID().toString());
 		user.setNome(userParam.getNome());
 		user.setCognome(userParam.getCognome());
 		user.setPassword(userParam.getPassword());
@@ -50,6 +51,8 @@ public class TrackerUserImpl implements TrackerUserInterface {
 		LOGGER.info("Utente creato");
 		userRepo.save(user);
 		LOGGER.info("Utente salvato a database");
+		UtenteDto dto=fromEntityToDto(user);
+		return dto;
 	}
 
 	//Metodo per leggere i dati di un determinato utente

@@ -4,7 +4,7 @@ import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.Utente;
 
-public class BodyConverterTimeSheet {
+public class TimeSheetWrapper {
 
 	private TimeSheetDto timeDto;
 	private Utente utente;

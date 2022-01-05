@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
-public class Base {
+public class BaseEntity {
 	
 	@Column(name = "create_timestamp")
 	private Date createTimestamp;

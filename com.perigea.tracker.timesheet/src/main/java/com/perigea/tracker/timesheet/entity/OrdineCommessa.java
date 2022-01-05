@@ -19,7 +19,7 @@ import com.perigea.tracker.timesheet.entity.keys.RelazioneIdOrdineCommessaKey;
 @Entity
 @IdClass(RelazioneIdOrdineCommessaKey.class)
 @Table(name = "ordine_commessa")
-public class OrdineCommessa extends Base{
+public class OrdineCommessa extends BaseEntity{
 
 	@Id
 	@Column(name="codice_commessa")

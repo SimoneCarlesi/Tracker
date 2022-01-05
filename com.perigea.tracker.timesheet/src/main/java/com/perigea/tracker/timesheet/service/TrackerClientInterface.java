@@ -2,10 +2,12 @@ package com.perigea.tracker.timesheet.service;
 
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
+import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
+import com.perigea.tracker.timesheet.entity.OrdineCommessa;
 
 public interface TrackerClientInterface {
 
-	public void createCustomerPersonalData(AnagraficaClienteDto dtoParam);
+	public AnagraficaClienteDto createCustomerPersonalData(AnagraficaClienteDto dtoParam);
 
 	public void readCustomerPersonalData(AnagraficaClienteDto dtoParam);
 
@@ -13,6 +15,5 @@ public interface TrackerClientInterface {
 
 	public void deleteCustomerPersonalData(AnagraficaClienteDto dtoParam);
 	
-	public void createOrdineCommessa (OrdineCommessaDto dtoParam);
 	
 }

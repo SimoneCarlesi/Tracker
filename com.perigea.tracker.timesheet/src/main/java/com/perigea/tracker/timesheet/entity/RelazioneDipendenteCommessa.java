@@ -17,7 +17,7 @@ import com.perigea.tracker.timesheet.entity.keys.RelazioneIdRelazioneDipendenteC
 @Entity
 @IdClass(RelazioneIdRelazioneDipendenteCommessaKey.class)
 @Table(name = "relazione_dipendente_commessa")
-public class RelazioneDipendenteCommessa extends Base{
+public class RelazioneDipendenteCommessa extends BaseEntity{
 
 	@Id
 	@Column(name="codice_persona")

@@ -3,7 +3,7 @@ package com.perigea.tracker.timesheet.converter;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 
-public class BodyConverterCommessaNonFatturabile {
+public class CommessaNonFatturabileWrapper {
 	
 	private CommessaNonFatturabileDto commessaParam;
 	private CommessaDto commessa;

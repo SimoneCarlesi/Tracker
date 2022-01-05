@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.converter.BodyConverterCommessaFatturabile;
-import com.perigea.tracker.timesheet.converter.BodyConverterCommessaNonFatturabile;
-import com.perigea.tracker.timesheet.converter.BodyConverterTimeSheet;
+import com.perigea.tracker.timesheet.converter.CommessaFatturabileWrapper;
+import com.perigea.tracker.timesheet.converter.CommessaNonFatturabileWrapper;
+import com.perigea.tracker.timesheet.converter.TimeSheetWrapper;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
-import com.perigea.tracker.timesheet.dto.GenericDto;
+import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
+import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.service.impl.TrackerCommessaImpl;
@@ -25,10 +26,7 @@ import com.perigea.tracker.timesheet.service.impl.TrackerTimeSheetImpl;
 import com.perigea.tracker.timesheet.service.impl.TrackerUserImpl;
 
 //@ TODO controller advise, exception handler
-//@ TODO mapstruct controllare cosa fa per gestire il get e le entity
-//@ TODO non restituire mai le entity
-//@ TODO creare una response entity generica e usare come ritorno la response T
-//@ TODO creare un dto generico di risposta che contenga data richiesta,, utente che la fa e il risultato
+//@ TODO mapstruct controllare cosa fa per gestire il get e le entity ( come metterlo nel pom)
 
 @RestController
 public class TrackerController {
@@ -47,15 +45,16 @@ public class TrackerController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerController.class);
 
+	//@ TODO avere un builder per genericWrapperResponse ( costruttore o metodo di utilità per creare una response)
 	// Metodo per creare un utente
 	@PostMapping(value = "/createUser")
-	public ResponseEntity <?> createUser(@RequestBody UtenteDto dto, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		userService.createUser(dto);
-		GenericDto genericDto=new GenericDto();
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+		UtenteDto dto=userService.createUser(dtoParam);
+		GenericWrapperResponse<UtenteDto> genericDto=new GenericWrapperResponse<>();
 		Date date=new Date();
 		genericDto.setDataRichiesta(date);
-		genericDto.setUtente(nomeModifica+ " " + cognomeModifica);
-		genericDto.setRisultato("Utente creato");
+		genericDto.setUtenteModifica(nomeModifica+ " " + cognomeModifica);
+		genericDto.setRisultato(dto);
 		return ResponseEntity.ok(genericDto);
 	}
 
@@ -117,7 +116,7 @@ public class TrackerController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/createTimeSheet")
-	public ResponseEntity <?> createTimeSheet(@RequestBody BodyConverterTimeSheet bodyConverter) {
+	public ResponseEntity <?> createTimeSheet(@RequestBody TimeSheetWrapper bodyConverter) {
 		timeSheetService.createTimeSheet(bodyConverter);
 		return ResponseEntity.ok("TimeSheet creato");
 	}
@@ -125,14 +124,14 @@ public class TrackerController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/createCommessaFatturabile")
-	public ResponseEntity <?> createCommessaFatturabile(@RequestBody BodyConverterCommessaFatturabile commessaParam) {
+	public ResponseEntity <?> createCommessaFatturabile(@RequestBody CommessaFatturabileWrapper commessaParam) {
 		commessaService.createCommessaFatturabile(commessaParam);
 		return ResponseEntity.ok("CommessaFatturabile creata");
 	}
 	
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/createCommessaNonFatturabile")
-	public ResponseEntity <?> createCommessaNonFatturabile(@RequestBody BodyConverterCommessaNonFatturabile body) {
+	public ResponseEntity <?> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileWrapper body) {
 		commessaService.createCommessaNonFatturabile(body.getCommessaParam(),body.getCommessa());
 		return ResponseEntity.ok("CommessaNonFatturabile creata");
 	}

@@ -19,7 +19,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaType;
 
 @Entity
 @Table(name="commessa")
-public class Commessa extends Base {
+public class Commessa extends BaseEntity {
 
 	@Id
 	@Column(name="codice_commessa", nullable=false)

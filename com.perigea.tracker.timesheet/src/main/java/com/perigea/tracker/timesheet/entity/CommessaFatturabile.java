@@ -18,7 +18,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCommessaFatturabileType;
 
 @Entity
 @Table(name = "commessa_fatturabile")
-public class CommessaFatturabile extends Base {
+public class CommessaFatturabile extends BaseEntity {
 
 	@Id
 	@Column(name="codice_commessa",nullable=false)

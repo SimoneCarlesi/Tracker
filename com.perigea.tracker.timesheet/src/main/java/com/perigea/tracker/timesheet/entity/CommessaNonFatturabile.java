@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "commessa_non_fatturabile")
-public class CommessaNonFatturabile extends Base {
+public class CommessaNonFatturabile extends BaseEntity {
 
 	@Id
 	@Column(name="codice_commessa",nullable=false)

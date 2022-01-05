@@ -18,7 +18,7 @@ import com.perigea.tracker.timesheet.enumerator.TipoCostoNotaSpeseType;
 @Entity
 @IdClass(RelazioneIdNotaSpeseKey.class)
 @Table(name = "nota_spese")
-public class NotaSpese extends Base {
+public class NotaSpese extends BaseEntity {
 
 	@Id
 	@Column(name = "anno_di_riferimento")

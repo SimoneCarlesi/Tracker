@@ -17,7 +17,7 @@ import com.perigea.tracker.timesheet.entity.keys.RelazioneIdTimeSheetKey;
 @Entity
 @IdClass(RelazioneIdTimeSheetKey.class)
 @Table(name = "time_sheet")
-public class TimeSheet extends Base{
+public class TimeSheet extends BaseEntity{
 
 
 	@Id

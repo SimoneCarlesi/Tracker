@@ -1,6 +1,6 @@
 package com.perigea.tracker.timesheet.service;
 
-import com.perigea.tracker.timesheet.converter.BodyConverterTimeSheet;
+import com.perigea.tracker.timesheet.converter.TimeSheetWrapper;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
@@ -15,7 +15,7 @@ import com.perigea.tracker.timesheet.entity.Utente;
 public interface TrackerUserInterface {
 	
 	
-	public void createUser(UtenteDto userParam);
+	public UtenteDto createUser(UtenteDto userParam);
 	
 	public UtenteDto readUser(String id);
 	

@@ -1,12 +1,12 @@
 package com.perigea.tracker.timesheet.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,7 +15,7 @@ import com.perigea.tracker.timesheet.enumerator.TipologiaPagamentoType;
 
 @Entity
 @Table(name = "anagrafica_cliente")
-public class AnagraficaCliente extends Base {
+public class AnagraficaCliente extends BaseEntity {
 
 	@Id
 	@Column(name = "ragione_sociale_cliente")
@@ -55,7 +55,8 @@ public class AnagraficaCliente extends Base {
 	private Integer progressivoPerCommesse;
 
 	@Column(name = "tipologia_di_pagamento")
-	private String tipologiaPagamentoType;
+	@Enumerated(EnumType.STRING)
+	private TipologiaPagamentoType tipologiaPagamentoType;
 
 	@Column(name = "note_per_la_fatturazione")
 	private String notePerLaFatturazione;
@@ -164,11 +165,11 @@ public class AnagraficaCliente extends Base {
 		this.progressivoPerCommesse = progressivoPerCommesse;
 	}
 
-	public String getTipologiaPagamentoType() {
+	public TipologiaPagamentoType getTipologiaPagamentoType() {
 		return tipologiaPagamentoType;
 	}
 
-	public void setTipologiaPagamentoType(String tipologiaPagamentoType) {
+	public void setTipologiaPagamentoType(TipologiaPagamentoType tipologiaPagamentoType) {
 		this.tipologiaPagamentoType = tipologiaPagamentoType;
 	}
 

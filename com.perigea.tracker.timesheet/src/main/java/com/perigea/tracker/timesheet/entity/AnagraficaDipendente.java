@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "anagrafica_dipendente")
-public class AnagraficaDipendente extends Base {
+public class AnagraficaDipendente extends BaseEntity {
 
 	@Id
 	@Column(name="codice_persona")

@@ -17,7 +17,7 @@ import com.perigea.tracker.timesheet.enumerator.StatoUtenteType;
 
 @Entity
 @Table(name = "utente")
-public class Utente extends Base {
+public class Utente extends BaseEntity {
 
 	@Id
 	@Column(name = "codice_persona", nullable = false)
