@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -73,6 +74,27 @@ public class AnagraficaDipendente extends BaseEntity {
 
 	@Column(name = "codice_fiscale")
 	private String codiceFiscale;
+	
+	@ManyToOne
+	@JoinColumn(name="codiceResponsabile", referencedColumnName = "codice_persona")
+	private Utente codiceResponsabile;
+
+	
+	public String getCodicePersona() {
+		return codicePersona;
+	}
+
+	public void setCodicePersona(String codicePersona) {
+		this.codicePersona = codicePersona;
+	}
+
+	public Utente getResponsabile() {
+		return codiceResponsabile;
+	}
+
+	public void setResponsabile(Utente codiceResponsabile) {
+		this.codiceResponsabile = codiceResponsabile;
+	}
 
 	public Utente getUtenteDipendente() {
 		return utenteDipendente;

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
-import com.perigea.tracker.timesheet.service.impl.TrackerRoleImpl;
+import com.perigea.tracker.timesheet.service.RoleService;
 
 @RestController
-public class TrackerRoleController {
+public class RoleController {
 	
 	@Autowired
-	private TrackerRoleImpl roleService;
+	private RoleService roleService;
 	
 
 	// Metodo per creare un ruolo

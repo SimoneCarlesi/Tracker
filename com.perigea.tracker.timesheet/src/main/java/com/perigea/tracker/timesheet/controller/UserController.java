@@ -20,21 +20,21 @@ import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
-import com.perigea.tracker.timesheet.service.impl.TrackerCommessaImpl;
-import com.perigea.tracker.timesheet.service.impl.TrackerRoleImpl;
-import com.perigea.tracker.timesheet.service.impl.TrackerTimeSheetImpl;
-import com.perigea.tracker.timesheet.service.impl.TrackerUserImpl;
+import com.perigea.tracker.timesheet.service.CommessaService;
+import com.perigea.tracker.timesheet.service.RoleService;
+import com.perigea.tracker.timesheet.service.TimeSheetService;
+import com.perigea.tracker.timesheet.service.UserService;
 
 //@ TODO controller advise, exception handler
 //@ TODO mapstruct controllare cosa fa per gestire il get e le entity ( come metterlo nel pom)
 
 @RestController
-public class TrackerUserController {
+public class UserController {
 
 	@Autowired
-	private TrackerUserImpl userService;
+	private UserService userService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	//@ TODO avere un builder per genericWrapperResponse ( costruttore o metodo di utilità per creare una response)
 	// Metodo per creare un utente
@@ -65,9 +65,15 @@ public class TrackerUserController {
 
 	// Metodo per cancellare un utente
 	@GetMapping(value = "/delete-user")
-	public ResponseEntity <?> deleteUser(@RequestParam String codicePersona) {
+	public ResponseEntity <GenericWrapperResponse<String>> deleteUser(@RequestParam String codicePersona, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		userService.deleteUser(codicePersona);
-		return ResponseEntity.ok("Cancellazione utente effettuata");
+		Date date=new Date();
+		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato("User eliminato")
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per aggiornare un utente

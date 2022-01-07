@@ -1,26 +1,26 @@
-package com.perigea.tracker.timesheet.service.impl;
+package com.perigea.tracker.timesheet.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerUserController;
+import com.perigea.tracker.timesheet.controller.UserController;
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.entity.TimeSheet;
 import com.perigea.tracker.timesheet.entity.Utente;
 import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.TimeSheetRepository;
-import com.perigea.tracker.timesheet.service.TrackerTimeSheetInterface;
+
 
 @Service
-public class TrackerTimeSheetImpl implements TrackerTimeSheetInterface{
+public class TimeSheetService{
 
 	@Autowired
 	private TimeSheetRepository timeSheetRepo;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	public TimeSheetDto createTimeSheet(Utente utente,Commessa commessa,TimeSheetDto timeSheetParam) {
 		TimeSheet timeSheetEntity=DtoEntityMapper.INSTANCE.fromDtoToEntityTimeSheet(timeSheetParam);

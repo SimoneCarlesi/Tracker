@@ -1,4 +1,4 @@
-package com.perigea.tracker.timesheet.service.impl;
+package com.perigea.tracker.timesheet.service;
 
 import java.util.Date;
 
@@ -7,20 +7,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerUserController;
+import com.perigea.tracker.timesheet.controller.UserController;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.entity.AnagraficaCliente;
 import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.AnagraficaClienteRepository;
-import com.perigea.tracker.timesheet.service.TrackerClientInterface;
 
 @Service
-public class TrackerClientImpl implements TrackerClientInterface {
+public class ClientService{
 	
 	@Autowired
 	private AnagraficaClienteRepository anagraficaClienteRepo;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	
 	public AnagraficaClienteDto createCustomerPersonalData(AnagraficaClienteDto dto) {

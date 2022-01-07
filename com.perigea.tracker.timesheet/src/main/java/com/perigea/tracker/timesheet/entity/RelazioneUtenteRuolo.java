@@ -17,7 +17,7 @@ import com.perigea.tracker.timesheet.enumerator.RuoloType;
 @Entity
 @IdClass(RelazioneIdUtenteRuoloKey.class)
 @Table(name = "utente_ruolo")
-public class UtenteRuolo {
+public class RelazioneUtenteRuolo {
 
 	@Id
 	@Column(name="codice_persona")

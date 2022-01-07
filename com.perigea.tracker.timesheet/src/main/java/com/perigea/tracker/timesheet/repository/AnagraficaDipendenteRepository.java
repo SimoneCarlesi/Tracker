@@ -7,6 +7,8 @@ import com.perigea.tracker.timesheet.entity.AnagraficaDipendente;
 
 @Repository
 public interface AnagraficaDipendenteRepository extends JpaRepository<AnagraficaDipendente,Long> {
+	
+	public AnagraficaDipendente findByCodicePersona(String codicePersona);
 
 } 
 

@@ -19,15 +19,15 @@ import com.perigea.tracker.timesheet.dto.CommessaFatturabileDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.entity.Commessa;
-import com.perigea.tracker.timesheet.service.impl.TrackerCommessaImpl;
+import com.perigea.tracker.timesheet.service.CommessaService;
 
 @RestController
-public class TrackerCommessaController {
+public class CommessaController {
 
 	@Autowired
-	private TrackerCommessaImpl commessaService;
+	private CommessaService commessaService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa-fatturabile")
@@ -57,9 +57,15 @@ public class TrackerCommessaController {
 
 	// Metodo per creare un timesheet
 	@GetMapping(value = "/delete-commessa-non-fatturabile")
-	public ResponseEntity <?> deleteCommessaNonFatturabile(@RequestParam String codiceCommessa) {
+	public ResponseEntity <GenericWrapperResponse<String>> deleteCommessaNonFatturabile(@RequestParam String codiceCommessa,  @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		commessaService.deleteCommessaNonFatturabile(codiceCommessa);
-		return ResponseEntity.ok("CommessaNonFatturabile cancellata");
+		Date date=new Date();
+		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato("Commessa non fatturabile eliminata")
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per creare un timesheet
@@ -77,8 +83,14 @@ public class TrackerCommessaController {
 
 	// Metodo per creare un timesheet
 	@GetMapping(value = "/delete-commessa")
-	public ResponseEntity <?> deleteCommessa(@RequestParam String codiceCommessa) {
+	public ResponseEntity <GenericWrapperResponse<String>> deleteCommessa(@RequestParam String codiceCommessa, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
 		commessaService.deleteCommessa(codiceCommessa);
-		return ResponseEntity.ok("Commessa cancellata");
+		Date date=new Date();
+		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
+				.dataRichiesta(date)
+				.utenteModifica(nomeModifica+cognomeModifica)
+				.risultato("Commessa eliminata")
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 }

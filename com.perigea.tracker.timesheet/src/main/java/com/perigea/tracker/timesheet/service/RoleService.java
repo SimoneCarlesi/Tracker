@@ -1,4 +1,4 @@
-package com.perigea.tracker.timesheet.service.impl;
+package com.perigea.tracker.timesheet.service;
 
 import java.util.List;
 
@@ -7,22 +7,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.perigea.tracker.timesheet.controller.TrackerUserController;
-import com.perigea.tracker.timesheet.converter.EnumConverter;
+import com.perigea.tracker.timesheet.controller.UserController;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.entity.Ruoli;
 import com.perigea.tracker.timesheet.enumerator.RuoloType;
 import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.RuoliRepository;
-import com.perigea.tracker.timesheet.service.TrackerRoleInterface;
+
 
 @Service
-public class TrackerRoleImpl implements TrackerRoleInterface{
+public class RoleService {
 
 	@Autowired
 	private RuoliRepository roleRepo;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackerUserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	//Metodo per creare un nuovo ruolo
 	public RuoliDto createRole(RuoliDto roleParam) {
@@ -57,7 +56,7 @@ public class TrackerRoleImpl implements TrackerRoleInterface{
 	public void deleteRole(String roleParam) {
 		List<Ruoli> entity= roleRepo.findAll();
 		for(Ruoli r: entity) {
-			if(r.getRuoloType().equalsIgnoreCase(roleParam)) {
+			if(r.getRuoloType().equals(roleParam)) {
 				roleRepo.delete(r);
 			} else {
 				LOGGER.info("RuoloType non trovato");

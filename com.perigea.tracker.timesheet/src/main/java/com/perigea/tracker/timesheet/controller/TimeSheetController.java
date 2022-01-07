@@ -9,26 +9,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
+import com.perigea.tracker.timesheet.converter.TimeSheetWrapper;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
+import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
-import com.perigea.tracker.timesheet.service.impl.TrackerClientImpl;
+import com.perigea.tracker.timesheet.service.TimeSheetService;
 
 @RestController
-public class TrackerClientController {
+public class TimeSheetController {
+	
 
 	@Autowired
-	private TrackerClientImpl commessaService;
+	private TimeSheetService timeSheetService;
 	
-	@PostMapping(value = "/create-anagrafica-cliente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		AnagraficaClienteDto dto=commessaService.createCustomerPersonalData(dtoParam);
+
+	// Metodo per creare un timesheet
+	@PostMapping(value = "/create-timesheet")
+	public ResponseEntity <?> createTimeSheet(@RequestBody TimeSheetWrapper bodyConverter, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+		TimeSheetDto dto=timeSheetService.createTimeSheet(bodyConverter.getUtente(),bodyConverter.getCommessa(),bodyConverter.getTimeDto());
 		Date date=new Date();
-		GenericWrapperResponse<AnagraficaClienteDto>genericDto=GenericWrapperResponse.<AnagraficaClienteDto>builder()
+		GenericWrapperResponse<TimeSheetDto> genericDto=GenericWrapperResponse.<TimeSheetDto>builder()
 				.dataRichiesta(date)
 				.utenteModifica(nomeModifica+cognomeModifica)
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
 	}
+
 }
