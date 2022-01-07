@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -12,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.converter.CommessaFatturabileWrapper;
-import com.perigea.tracker.timesheet.converter.CommessaNonFatturabileWrapper;
-import com.perigea.tracker.timesheet.converter.TimeSheetWrapper;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
@@ -24,6 +23,9 @@ import com.perigea.tracker.timesheet.service.CommessaService;
 import com.perigea.tracker.timesheet.service.RoleService;
 import com.perigea.tracker.timesheet.service.TimeSheetService;
 import com.perigea.tracker.timesheet.service.UserService;
+import com.perigea.tracker.timesheet.wrapper.CommessaFatturabileWrapper;
+import com.perigea.tracker.timesheet.wrapper.CommessaNonFatturabileWrapper;
+import com.perigea.tracker.timesheet.wrapper.TimeSheetWrapper;
 
 //@ TODO controller advise, exception handler
 //@ TODO mapstruct controllare cosa fa per gestire il get e le entity ( come metterlo nel pom)
@@ -39,7 +41,7 @@ public class UserController {
 	//@ TODO avere un builder per genericWrapperResponse ( costruttore o metodo di utilità per creare una response)
 	// Metodo per creare un utente
 	@PostMapping(value = "/create-user")
-	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		UtenteDto dto=userService.createUser(dtoParam);
 		Date date=new Date();
 		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()

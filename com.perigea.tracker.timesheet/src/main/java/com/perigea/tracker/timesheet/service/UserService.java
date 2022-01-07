@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +21,7 @@ import com.perigea.tracker.timesheet.entity.Utente;
 import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.RelazioneDipendenteCommessaRepository;
 import com.perigea.tracker.timesheet.repository.UtenteRepository;
+import com.perigea.tracker.timesheet.utility.TSUtils;
 
 
 @Service
@@ -36,12 +39,10 @@ public class UserService{
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 
-	//Metodo per accedere con le proprie credenziali al database per tenere traccia di chi effettua cambiamenti
-
-	//@ TODO creare una classe utility per l'UUID
 	//Metodo per creare un nuovo utente per poi inserirlo a database
-	public UtenteDto createUser(UtenteDto userParam){
+	public UtenteDto createUser(UtenteDto userParam) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		Utente user = DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(userParam);
+		user.setCodicePersona(TSUtils.UUDI());
 		LOGGER.info("Utente creato");
 		userRepo.save(user);
 		LOGGER.info("Utente salvato a database");

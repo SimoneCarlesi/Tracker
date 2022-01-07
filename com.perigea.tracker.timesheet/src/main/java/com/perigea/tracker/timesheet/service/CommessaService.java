@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perigea.tracker.timesheet.controller.UserController;
-import com.perigea.tracker.timesheet.converter.CommessaFatturabileWrapper;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
 import com.perigea.tracker.timesheet.dto.CommessaFatturabileDto;
@@ -24,6 +25,8 @@ import com.perigea.tracker.timesheet.repository.CommessaFatturabileRepository;
 import com.perigea.tracker.timesheet.repository.CommessaNonFatturabileRepository;
 import com.perigea.tracker.timesheet.repository.CommessaRepository;
 import com.perigea.tracker.timesheet.repository.OrdineCommessaRepository;
+import com.perigea.tracker.timesheet.utility.TSUtils;
+import com.perigea.tracker.timesheet.wrapper.CommessaFatturabileWrapper;
 
 @Service
 public class CommessaService{
@@ -45,7 +48,7 @@ public class CommessaService{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
-	public CommessaFatturabileDto createCommessaFatturabile(CommessaFatturabileWrapper bodyConverter) {
+	public CommessaFatturabileDto createCommessaFatturabile(CommessaFatturabileWrapper bodyConverter) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaFatturabile entity=new CommessaFatturabile();
 		
 		//AnagraficaCliente relazionata
@@ -89,7 +92,7 @@ public class CommessaService{
 		return dto;
 	}
 	
-	public CommessaNonFatturabileDto createCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam,CommessaDto dtoCommessa) {
+	public CommessaNonFatturabileDto createCommessaNonFatturabile(CommessaNonFatturabileDto dtoParam,CommessaDto dtoCommessa) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaNonFatturabile entity=new CommessaNonFatturabile();
 		CommessaDto commessaDto=createCommessa(dtoCommessa);
 		Commessa commessa=DtoEntityMapper.INSTANCE.fromDtoToEntityCommessa(commessaDto);
@@ -102,9 +105,9 @@ public class CommessaService{
 		return dto;
 	}
 	
-	public CommessaDto createCommessa(CommessaDto dto) {
+	public CommessaDto createCommessa(CommessaDto dto) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		Commessa entity= new Commessa();
-		entity.setCodiceCommessa(UUID.randomUUID().toString());
+		entity.setCodiceCommessa(TSUtils.UUDI());
 		entity.setCommessaType(dto.getTipoCommessaType());
 		entity.setCreateUser("");
 		entity.setCommessaType(dto.getTipoCommessaType());
@@ -149,7 +152,7 @@ public class CommessaService{
 		return dto;
 	}
 
-	public OrdineCommessa createOrdineCommessa (CommessaFatturabileWrapper bodyConverter) {
+	public OrdineCommessa createOrdineCommessa (CommessaFatturabileWrapper bodyConverter) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		OrdineCommessa entityOrdineCommessa = new OrdineCommessa();
 		CommessaFatturabileDto commessaFatturabileDto=createCommessaFatturabile(bodyConverter);
 		CommessaFatturabile entityCommessaFatturabile=DtoEntityMapper.INSTANCE.fromDtoToEntityCommessaFatturabile(commessaFatturabileDto);

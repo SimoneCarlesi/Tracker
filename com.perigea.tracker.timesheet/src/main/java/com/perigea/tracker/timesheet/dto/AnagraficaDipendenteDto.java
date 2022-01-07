@@ -29,7 +29,7 @@ public class AnagraficaDipendenteDto {
 	private String codiceFiscale;
 	private String createUser;
 	private String lastUpdateUser;
-	
+	//private String codiceResponsabile;
 	
 	public AnagraficaDipendenteDto() {
 		super();

@@ -40,9 +40,6 @@ public class Utente extends BaseEntity {
 	@OneToMany(mappedBy = "utenteSpesa")
 	private List<NotaSpese> noteSpese = new ArrayList<>();
 
-	@OneToOne(mappedBy = "utenteDipendente")
-	private AnagraficaDipendente dipendente;
-
 	@OneToMany(mappedBy = "utenteTimeSheet")
 	private List<TimeSheet> timeSheet = new ArrayList<>();
 
@@ -52,8 +49,11 @@ public class Utente extends BaseEntity {
 	@OneToMany(mappedBy = "utente")
 	private List<RelazioneUtenteRuolo> utenteRuolo = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "codiceResponsabile")
-	private List<AnagraficaDipendente> sottoposti = new ArrayList<>();
+	@OneToOne(mappedBy = "utenteDipendente")
+	private AnagraficaDipendente dipendente;
+	
+//	@OneToMany(mappedBy = "codiceResponsabile")
+//	private List<AnagraficaDipendente> sottoposti = new ArrayList<>();
 
 	public String getCodicePersona() {
 		return codicePersona;
@@ -67,13 +67,13 @@ public class Utente extends BaseEntity {
 		return nome;
 	}
 
-	public List<AnagraficaDipendente> getSottoposti() {
-		return sottoposti;
-	}
-
-	public void setSottoposti(List<AnagraficaDipendente> sottoposti) {
-		this.sottoposti = sottoposti;
-	}
+//	public List<AnagraficaDipendente> getSottoposti() {
+//		return sottoposti;
+//	}
+//
+//	public void setSottoposti(List<AnagraficaDipendente> sottoposti) {
+//		this.sottoposti = sottoposti;
+//	}
 
 	public void setNome(String nome) {
 		this.nome = nome;

@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import com.perigea.tracker.timesheet.entity.AnagraficaDipendente;
 import com.perigea.tracker.timesheet.entity.Utente;
 import com.perigea.tracker.timesheet.mapstruct.DtoEntityMapper;
 import com.perigea.tracker.timesheet.repository.AnagraficaDipendenteRepository;
+import com.perigea.tracker.timesheet.utility.TSUtils;
 
 @Service
 public class DipendenteService {
@@ -23,9 +26,10 @@ public class DipendenteService {
 	@Autowired
 	private AnagraficaDipendenteRepository dipendenteRepo;
 
-	public AnagraficaDipendenteDto createDipendente(AnagraficaDipendenteDto dipendenteParam, UtenteDto dtoParam){
+	public AnagraficaDipendenteDto createDipendente(AnagraficaDipendenteDto dipendenteParam, UtenteDto dtoParam) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		Utente utente=DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(dtoParam);
 		AnagraficaDipendente dipendente = DtoEntityMapper.INSTANCE.fromDtoToEntityAnagraficaDipendente(dipendenteParam);
+		dipendente.setCodicePersona(TSUtils.UUDI());
 		dipendente.setUtenteDipendente(utente);
 		utente.setDipendente(dipendente);
 		dipendenteRepo.save(dipendente);

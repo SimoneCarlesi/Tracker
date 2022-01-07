@@ -1,4 +1,4 @@
-package com.perigea.tracker.timesheet.converter;
+package com.perigea.tracker.timesheet.wrapper;
 
 import com.perigea.tracker.timesheet.dto.TimeSheetDto;
 import com.perigea.tracker.timesheet.entity.Commessa;

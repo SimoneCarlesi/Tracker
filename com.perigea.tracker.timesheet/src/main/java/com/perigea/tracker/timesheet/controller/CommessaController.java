@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -12,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.converter.CommessaFatturabileWrapper;
-import com.perigea.tracker.timesheet.converter.CommessaNonFatturabileWrapper;
 import com.perigea.tracker.timesheet.dto.CommessaDto;
 import com.perigea.tracker.timesheet.dto.CommessaFatturabileDto;
 import com.perigea.tracker.timesheet.dto.CommessaNonFatturabileDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.entity.Commessa;
 import com.perigea.tracker.timesheet.service.CommessaService;
+import com.perigea.tracker.timesheet.wrapper.CommessaFatturabileWrapper;
+import com.perigea.tracker.timesheet.wrapper.CommessaNonFatturabileWrapper;
 
 @RestController
 public class CommessaController {
@@ -31,7 +33,7 @@ public class CommessaController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa-fatturabile")
-	public ResponseEntity <GenericWrapperResponse<CommessaFatturabileDto>> createCommessaFatturabile(@RequestBody CommessaFatturabileWrapper commessaParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<CommessaFatturabileDto>> createCommessaFatturabile(@RequestBody CommessaFatturabileWrapper commessaParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaFatturabileDto dto=commessaService.createCommessaFatturabile(commessaParam);
 		Date date=new Date();
 		GenericWrapperResponse<CommessaFatturabileDto>genericDto=GenericWrapperResponse.<CommessaFatturabileDto>builder()
@@ -44,7 +46,7 @@ public class CommessaController {
 	
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa-non-fatturabile")
-	public ResponseEntity <GenericWrapperResponse<CommessaNonFatturabileDto>> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileWrapper body,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<CommessaNonFatturabileDto>> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileWrapper body,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaNonFatturabileDto dto=commessaService.createCommessaNonFatturabile(body.getCommessaParam(),body.getCommessa());
 		Date date=new Date();
 		GenericWrapperResponse<CommessaNonFatturabileDto>genericDto=GenericWrapperResponse.<CommessaNonFatturabileDto>builder()
@@ -70,7 +72,7 @@ public class CommessaController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa")
-	public ResponseEntity <GenericWrapperResponse<CommessaDto>> createCommessa(@RequestBody CommessaDto commessaParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<CommessaDto>> createCommessa(@RequestBody CommessaDto commessaParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaDto dto=commessaService.createCommessa(commessaParam);
 		Date date=new Date();
 		GenericWrapperResponse<CommessaDto>genericDto=GenericWrapperResponse.<CommessaDto>builder()

@@ -23,6 +23,10 @@ public class AnagraficaDipendente extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "codice_persona", referencedColumnName = "codice_persona")
 	private Utente utenteDipendente;
+	
+//	@ManyToOne
+//	@JoinColumn(name="codiceResponsabile", referencedColumnName = "cognome")
+//	private Utente codiceResponsabile;
 
 	@Column(name = "luogo_di_nascita")
 	private String luogoDiNascita;
@@ -75,9 +79,6 @@ public class AnagraficaDipendente extends BaseEntity {
 	@Column(name = "codice_fiscale")
 	private String codiceFiscale;
 	
-	@ManyToOne
-	@JoinColumn(name="codiceResponsabile", referencedColumnName = "codice_persona")
-	private Utente codiceResponsabile;
 
 	
 	public String getCodicePersona() {
@@ -88,13 +89,13 @@ public class AnagraficaDipendente extends BaseEntity {
 		this.codicePersona = codicePersona;
 	}
 
-	public Utente getResponsabile() {
-		return codiceResponsabile;
-	}
-
-	public void setResponsabile(Utente codiceResponsabile) {
-		this.codiceResponsabile = codiceResponsabile;
-	}
+//	public Utente getResponsabile() {
+//		return codiceResponsabile;
+//	}
+//
+//	public void setResponsabile(Utente codiceResponsabile) {
+//		this.codiceResponsabile = codiceResponsabile;
+//	}
 
 	public Utente getUtenteDipendente() {
 		return utenteDipendente;

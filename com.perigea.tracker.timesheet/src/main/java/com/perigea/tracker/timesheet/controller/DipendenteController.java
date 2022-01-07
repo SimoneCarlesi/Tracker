@@ -1,5 +1,7 @@
 package com.perigea.tracker.timesheet.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perigea.tracker.timesheet.converter.AnagraficaDipendenteWrapper;
 import com.perigea.tracker.timesheet.dto.AnagraficaDipendenteDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.service.DipendenteService;
+import com.perigea.tracker.timesheet.wrapper.AnagraficaDipendenteWrapper;
 
 @RestController
 public class DipendenteController {
@@ -22,7 +24,7 @@ public class DipendenteController {
 	private DipendenteService dipendenteService;
 	
 	@PostMapping(value = "/create-dipendente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> createUser(@RequestBody AnagraficaDipendenteWrapper wrapper, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> createUser(@RequestBody AnagraficaDipendenteWrapper wrapper, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		AnagraficaDipendenteDto dto=dipendenteService.createDipendente(wrapper.getDipendenteDto(),wrapper.getUtenteDto());
 		Date date=new Date();
 		GenericWrapperResponse<AnagraficaDipendenteDto> genericDto=GenericWrapperResponse.<AnagraficaDipendenteDto>builder()
