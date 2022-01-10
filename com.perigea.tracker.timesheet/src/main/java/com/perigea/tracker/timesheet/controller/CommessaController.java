@@ -29,16 +29,12 @@ public class CommessaController {
 	@Autowired
 	private CommessaService commessaService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa-fatturabile")
-	public ResponseEntity <GenericWrapperResponse<CommessaFatturabileDto>> createCommessaFatturabile(@RequestBody CommessaFatturabileWrapper commessaParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ResponseEntity <GenericWrapperResponse<CommessaFatturabileDto>> createCommessaFatturabile(@RequestBody CommessaFatturabileWrapper commessaParam) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaFatturabileDto dto=commessaService.createCommessaFatturabile(commessaParam);
-		Date date=new Date();
 		GenericWrapperResponse<CommessaFatturabileDto>genericDto=GenericWrapperResponse.<CommessaFatturabileDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -46,12 +42,10 @@ public class CommessaController {
 	
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa-non-fatturabile")
-	public ResponseEntity <GenericWrapperResponse<CommessaNonFatturabileDto>> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileWrapper body,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ResponseEntity <GenericWrapperResponse<CommessaNonFatturabileDto>> createCommessaNonFatturabile(@RequestBody CommessaNonFatturabileWrapper body) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaNonFatturabileDto dto=commessaService.createCommessaNonFatturabile(body.getCommessaParam(),body.getCommessa());
-		Date date=new Date();
 		GenericWrapperResponse<CommessaNonFatturabileDto>genericDto=GenericWrapperResponse.<CommessaNonFatturabileDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -59,25 +53,21 @@ public class CommessaController {
 
 	// Metodo per creare un timesheet
 	@GetMapping(value = "/delete-commessa-non-fatturabile")
-	public ResponseEntity <GenericWrapperResponse<String>> deleteCommessaNonFatturabile(@RequestParam String codiceCommessa,  @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		commessaService.deleteCommessaNonFatturabile(codiceCommessa);
-		Date date=new Date();
-		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
-				.risultato("Commessa non fatturabile eliminata")
+	public ResponseEntity <GenericWrapperResponse<CommessaNonFatturabileDto>> deleteCommessaNonFatturabile(@RequestParam String codiceCommessa) {
+		CommessaNonFatturabileDto dto =commessaService.deleteCommessaNonFatturabile(codiceCommessa);
+		GenericWrapperResponse<CommessaNonFatturabileDto>genericDto=GenericWrapperResponse.<CommessaNonFatturabileDto>builder()
+				.dataRichiesta(new Date())
+				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-commessa")
-	public ResponseEntity <GenericWrapperResponse<CommessaDto>> createCommessa(@RequestBody CommessaDto commessaParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ResponseEntity <GenericWrapperResponse<CommessaDto>> createCommessa(@RequestBody CommessaDto commessaParam) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		CommessaDto dto=commessaService.createCommessa(commessaParam);
-		Date date=new Date();
 		GenericWrapperResponse<CommessaDto>genericDto=GenericWrapperResponse.<CommessaDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -85,13 +75,11 @@ public class CommessaController {
 
 	// Metodo per creare un timesheet
 	@GetMapping(value = "/delete-commessa")
-	public ResponseEntity <GenericWrapperResponse<String>> deleteCommessa(@RequestParam String codiceCommessa, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		commessaService.deleteCommessa(codiceCommessa);
-		Date date=new Date();
-		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
-				.risultato("Commessa eliminata")
+	public ResponseEntity <GenericWrapperResponse<CommessaDto>> deleteCommessa(@RequestParam String codiceCommessa) {
+		CommessaDto dto= commessaService.deleteCommessa(codiceCommessa);
+		GenericWrapperResponse<CommessaDto>genericDto=GenericWrapperResponse.<CommessaDto>builder()
+				.dataRichiesta(new Date())
+				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
 	}

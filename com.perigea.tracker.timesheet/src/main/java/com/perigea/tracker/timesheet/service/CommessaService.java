@@ -107,18 +107,20 @@ public class CommessaService{
 	
 	public CommessaDto createCommessa(CommessaDto dto) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		Commessa entity= new Commessa();
-		entity.setCodiceCommessa(TSUtils.UUDI());
+		entity.setCodiceCommessa(TSUtils.uuid());
 		entity.setCommessaType(dto.getTipoCommessaType());
 		entity.setCreateUser("");
 		entity.setCommessaType(dto.getTipoCommessaType());
 		return dto;
 	}
 	
-	public void deleteCommessa(String codiceCommessa) {
+	public CommessaDto deleteCommessa(String codiceCommessa) {
 		Commessa entity=commessaRepo.findByCodiceCommessa(codiceCommessa);
 		if(entity != null) {
 			commessaRepo.delete(entity);
 		}
+		CommessaDto dto=DtoEntityMapper.INSTANCE.fromEntityToDtoCommessa(entity);
+		return dto;
 	}
 
 	public CommessaNonFatturabile readCommessaNonFatturabile(String codiceCommessa) {
@@ -138,11 +140,13 @@ public class CommessaService{
 		return dto;
 	}
 
-	public void deleteCommessaNonFatturabile(String codiceCommessa) {
+	public CommessaNonFatturabileDto deleteCommessaNonFatturabile(String codiceCommessa) {
 		CommessaNonFatturabile entity=commessaNonFatturabileRepo.findByCodiceCommessa(codiceCommessa);
 		if(entity != null) {
 			commessaNonFatturabileRepo.delete(entity);
 		}
+		CommessaNonFatturabileDto dto=DtoEntityMapper.INSTANCE.fromEntityToDtoCommessaNonFatturabile(entity);
+		return dto;
 	}
 	
 	public CommessaNonFatturabileDto fromEntityToDtoCommessaNonFatturabile(CommessaNonFatturabile entity) {

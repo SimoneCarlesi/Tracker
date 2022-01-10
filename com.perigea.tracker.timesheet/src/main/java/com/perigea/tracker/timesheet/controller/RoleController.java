@@ -24,12 +24,10 @@ public class RoleController {
 
 	// Metodo per creare un ruolo
 	@PostMapping(value = "/create-role")
-	public ResponseEntity <GenericWrapperResponse<RuoliDto>> createRole(@RequestBody RuoliDto dtoParam,  @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> createRole(@RequestBody RuoliDto dtoParam) {
 		RuoliDto dto= roleService.createRole(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -37,12 +35,10 @@ public class RoleController {
 
 	// Metodo per leggere un ruolo
 	@GetMapping(value = "/read-role")
-	public ResponseEntity <GenericWrapperResponse<RuoliDto>> readRole(@RequestParam String roleName,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> readRole(@RequestParam String roleName) {
 		RuoliDto dto=roleService.readRole(roleName);
-		Date date=new Date();
 		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -50,19 +46,21 @@ public class RoleController {
 
 	// Metodo per cancellare un ruolo
 	@GetMapping(value = "/delete-role")
-	public ResponseEntity <?> deleteRole(@RequestParam String roleName) {
-		roleService.deleteRole(roleName);
-		return ResponseEntity.ok("Cancellazione ruolo effettuata");
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> deleteRole(@RequestParam String roleName) {
+		RuoliDto dto=roleService.deleteRole(roleName);
+		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
+				.dataRichiesta(new Date())
+				.risultato(dto)
+				.build();
+		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per aggiornare un ruolo
 	@PostMapping(value = "/update-role")
-	public ResponseEntity <?> updateRole(@RequestBody RuoliDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<RuoliDto>> updateRole(@RequestBody RuoliDto dtoParam) {
 		RuoliDto dto=roleService.updateRole(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<RuoliDto>genericDto=GenericWrapperResponse.<RuoliDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);

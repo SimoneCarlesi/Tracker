@@ -53,15 +53,10 @@ public class RoleService {
 	}
 
 	//Metodo per eliminare un ruolo da database
-	public void deleteRole(String roleParam) {
-		List<Ruoli> entity= roleRepo.findAll();
-		for(Ruoli r: entity) {
-			if(r.getRuoloType().equals(roleParam)) {
-				roleRepo.delete(r);
-			} else {
-				LOGGER.info("RuoloType non trovato");
-			}
-		}
+	public RuoliDto deleteRole(String roleParam) {
+		Ruoli entity= roleRepo.findByRuoloType(roleParam);
+		RuoliDto dto=DtoEntityMapper.INSTANCE.fromEntityToDtoRuoli(entity);
+		return dto;
 	}
 	
 }

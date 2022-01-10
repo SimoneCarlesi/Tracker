@@ -25,12 +25,11 @@ public class TimeSheetController {
 
 	// Metodo per creare un timesheet
 	@PostMapping(value = "/create-timesheet")
-	public ResponseEntity <?> createTimeSheet(@RequestBody TimeSheetWrapper bodyConverter, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<TimeSheetDto>> createTimeSheet(@RequestBody TimeSheetWrapper bodyConverter) {
 		TimeSheetDto dto=timeSheetService.createTimeSheet(bodyConverter.getUtente(),bodyConverter.getCommessa(),bodyConverter.getTimeDto());
 		Date date=new Date();
 		GenericWrapperResponse<TimeSheetDto> genericDto=GenericWrapperResponse.<TimeSheetDto>builder()
 				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);

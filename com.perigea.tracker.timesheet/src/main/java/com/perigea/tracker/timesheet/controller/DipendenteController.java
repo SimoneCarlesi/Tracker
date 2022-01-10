@@ -24,12 +24,10 @@ public class DipendenteController {
 	private DipendenteService dipendenteService;
 	
 	@PostMapping(value = "/create-dipendente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> createUser(@RequestBody AnagraficaDipendenteWrapper wrapper, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> createUser(@RequestBody AnagraficaDipendenteWrapper wrapper) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		AnagraficaDipendenteDto dto=dipendenteService.createDipendente(wrapper.getDipendenteDto(),wrapper.getUtenteDto());
-		Date date=new Date();
 		GenericWrapperResponse<AnagraficaDipendenteDto> genericDto=GenericWrapperResponse.<AnagraficaDipendenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -37,12 +35,10 @@ public class DipendenteController {
 	
 	// Metodo per leggere un utente
 	@GetMapping(value = "/read-dipendente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> readUser(@RequestParam String codicePersona,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> readUser(@RequestParam String codicePersona) {
 		AnagraficaDipendenteDto dto=dipendenteService.readDipendente(codicePersona);
-		Date date=new Date();
 		GenericWrapperResponse<AnagraficaDipendenteDto> genericDto=GenericWrapperResponse.<AnagraficaDipendenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -50,25 +46,21 @@ public class DipendenteController {
 
 	// Metodo per cancellare un utente
 	@GetMapping(value = "/delete-dipendente")
-	public ResponseEntity <GenericWrapperResponse<String>> deleteUser(@RequestParam String codicePersona,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		dipendenteService.deleteDipendente(codicePersona);
-		Date date=new Date();
-		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
-				.risultato("Dipendente eliminato")
+	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> deleteUser(@RequestParam String codicePersona) {
+		AnagraficaDipendenteDto dto=dipendenteService.deleteDipendente(codicePersona);
+		GenericWrapperResponse<AnagraficaDipendenteDto>genericDto=GenericWrapperResponse.<AnagraficaDipendenteDto>builder()
+				.dataRichiesta(new Date())
+				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per aggiornare un utente
 	@PostMapping(value = "/update-dipendente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> updateUser(@RequestBody AnagraficaDipendenteDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<AnagraficaDipendenteDto>> updateUser(@RequestBody AnagraficaDipendenteDto dtoParam) {
 		AnagraficaDipendenteDto dto=dipendenteService.updateDipendente(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<AnagraficaDipendenteDto> genericDto=GenericWrapperResponse.<AnagraficaDipendenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);

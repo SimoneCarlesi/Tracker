@@ -41,12 +41,10 @@ public class UserController {
 	//@ TODO avere un builder per genericWrapperResponse ( costruttore o metodo di utilità per creare una response)
 	// Metodo per creare un utente
 	@PostMapping(value = "/create-user")
-	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> createUser(@RequestBody UtenteDto dtoParam) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		UtenteDto dto=userService.createUser(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -54,12 +52,10 @@ public class UserController {
 
 	// Metodo per leggere un utente
 	@GetMapping(value = "/read-user")
-	public ResponseEntity <GenericWrapperResponse<UtenteDto>> readUser(@RequestParam String codicePersona,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> readUser(@RequestParam String codicePersona) {
 		UtenteDto dto=userService.readUser(codicePersona);
-		Date date=new Date();
 		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -67,25 +63,21 @@ public class UserController {
 
 	// Metodo per cancellare un utente
 	@GetMapping(value = "/delete-user")
-	public ResponseEntity <GenericWrapperResponse<String>> deleteUser(@RequestParam String codicePersona, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
-		userService.deleteUser(codicePersona);
-		Date date=new Date();
-		GenericWrapperResponse<String>genericDto=GenericWrapperResponse.<String>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
-				.risultato("User eliminato")
+	public ResponseEntity <GenericWrapperResponse<UtenteDto>> deleteUser(@RequestParam String codicePersona) {
+		UtenteDto dto=userService.deleteUser(codicePersona);
+		GenericWrapperResponse<UtenteDto>genericDto=GenericWrapperResponse.<UtenteDto>builder()
+				.dataRichiesta(new Date())
+				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
 	}
 
 	// Metodo per aggiornare un utente
 	@PostMapping(value = "/update-user")
-	public ResponseEntity <?> updateUser(@RequestBody UtenteDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <?> updateUser(@RequestBody UtenteDto dtoParam) {
 		UtenteDto dto=userService.updateUser(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
@@ -93,12 +85,10 @@ public class UserController {
 
 	// Metodo per aggiornare lo status di un utente
 	@PostMapping(value = "/edit-status-user")
-	public ResponseEntity <?> editStatusUser(@RequestBody UtenteDto dtoParam,@RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <?> editStatusUser(@RequestBody UtenteDto dtoParam) {
 		UtenteDto dto=userService.editStatusUser(dtoParam);
-		Date date=new Date();
 		GenericWrapperResponse<UtenteDto> genericDto=GenericWrapperResponse.<UtenteDto>builder()
-				.dataRichiesta(date)
-				.utenteModifica(nomeModifica+cognomeModifica)
+				.dataRichiesta(new Date())
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);

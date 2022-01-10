@@ -2,6 +2,8 @@ package com.perigea.tracker.timesheet.dto;
 
 import java.util.Date;
 
+import com.perigea.tracker.timesheet.entity.AnagraficaDipendente;
+
 import lombok.Getter;
 import lombok.Setter;
 

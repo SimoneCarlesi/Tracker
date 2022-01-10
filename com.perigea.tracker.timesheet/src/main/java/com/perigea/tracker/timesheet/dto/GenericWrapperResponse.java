@@ -14,7 +14,6 @@ import lombok.Setter;
 public class GenericWrapperResponse<T> {
 	
 	private Date dataRichiesta;
-	private String utenteModifica;
 	private T risultato;
 
 }

@@ -29,7 +29,7 @@ public class DipendenteService {
 	public AnagraficaDipendenteDto createDipendente(AnagraficaDipendenteDto dipendenteParam, UtenteDto dtoParam) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		Utente utente=DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(dtoParam);
 		AnagraficaDipendente dipendente = DtoEntityMapper.INSTANCE.fromDtoToEntityAnagraficaDipendente(dipendenteParam);
-		dipendente.setCodicePersona(TSUtils.UUDI());
+		dipendente.setCodicePersona(TSUtils.uuid());
 		dipendente.setUtenteDipendente(utente);
 		utente.setDipendente(dipendente);
 		dipendenteRepo.save(dipendente);
@@ -56,15 +56,10 @@ public class DipendenteService {
 	}
 
 	//Metodo per eliminare un utente da database
-	public void deleteDipendente(String id) {
-		List<AnagraficaDipendente> entity= dipendenteRepo.findAll();
-		for(AnagraficaDipendente u: entity) {
-			if(u.getCodicePersona().equalsIgnoreCase(id)) {
-				dipendenteRepo.delete(u);
-			} else {
-				LOGGER.info("CodicePersona non trovato");
-			}
-		}
+	public AnagraficaDipendenteDto deleteDipendente(String id) {
+		AnagraficaDipendente entity= dipendenteRepo.findByCodicePersona(id);
+		AnagraficaDipendenteDto dto=DtoEntityMapper.INSTANCE.fromEntityToDtoAnagraficaDipendente(entity);
+		return dto;
 	}
 
 }

@@ -42,7 +42,7 @@ public class UserService{
 	//Metodo per creare un nuovo utente per poi inserirlo a database
 	public UtenteDto createUser(UtenteDto userParam) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		Utente user = DtoEntityMapper.INSTANCE.fromDtoToEntityUtente(userParam);
-		user.setCodicePersona(TSUtils.UUDI());
+		user.setCodicePersona(TSUtils.uuid());
 		LOGGER.info("Utente creato");
 		userRepo.save(user);
 		LOGGER.info("Utente salvato a database");
@@ -69,15 +69,10 @@ public class UserService{
 	}
 
 	//Metodo per eliminare un utente da database
-	public void deleteUser(String id) {
-		List<Utente> entity= userRepo.findAll();
-		for(Utente u: entity) {
-			if(u.getCodicePersona().equalsIgnoreCase(id)) {
-				userRepo.delete(u);
-			} else {
-				LOGGER.info("CodicePersona non trovato");
-			}
-		}
+	public UtenteDto deleteUser(String id) {
+		Utente entity= userRepo.findByCodicePersona(id);
+		UtenteDto dto=DtoEntityMapper.INSTANCE.fromEntityToDtoUtente(entity);
+		return dto;
 	}
 
 	//Metodo per aggiornare lo stato (attivo/cessato) di un utente

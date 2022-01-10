@@ -21,11 +21,10 @@ public class ClientController {
 	private ClientService commessaService;
 	
 	@PostMapping(value = "/create-anagrafica-cliente")
-	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam, @RequestParam String nomeModifica, @RequestParam String cognomeModifica) {
+	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam) {
 		AnagraficaClienteDto dto=commessaService.createCustomerPersonalData(dtoParam);
 		GenericWrapperResponse<AnagraficaClienteDto>genericDto=GenericWrapperResponse.<AnagraficaClienteDto>builder()
 				.dataRichiesta(new Date())
-				.utenteModifica(nomeModifica+cognomeModifica)
 				.risultato(dto)
 				.build();
 		return ResponseEntity.ok(genericDto);
