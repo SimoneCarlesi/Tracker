@@ -20,9 +20,9 @@ import com.perigea.tracker.timesheet.dto.OrdineCommessaDto;
 import com.perigea.tracker.timesheet.dto.RuoliDto;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
 import com.perigea.tracker.timesheet.service.CommessaService;
-import com.perigea.tracker.timesheet.service.RoleService;
+import com.perigea.tracker.timesheet.service.RuoloService;
 import com.perigea.tracker.timesheet.service.TimeSheetService;
-import com.perigea.tracker.timesheet.service.UserService;
+import com.perigea.tracker.timesheet.service.UtenteService;
 import com.perigea.tracker.timesheet.wrapper.CommessaFatturabileWrapper;
 import com.perigea.tracker.timesheet.wrapper.CommessaNonFatturabileWrapper;
 import com.perigea.tracker.timesheet.wrapper.TimeSheetWrapper;
@@ -31,12 +31,12 @@ import com.perigea.tracker.timesheet.wrapper.TimeSheetWrapper;
 //@ TODO mapstruct controllare cosa fa per gestire il get e le entity ( come metterlo nel pom)
 
 @RestController
-public class UserController {
+public class UtenteController {
 
 	@Autowired
-	private UserService userService;
+	private UtenteService userService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UtenteController.class);
 
 	//@ TODO avere un builder per genericWrapperResponse ( costruttore o metodo di utilità per creare una response)
 	// Metodo per creare un utente

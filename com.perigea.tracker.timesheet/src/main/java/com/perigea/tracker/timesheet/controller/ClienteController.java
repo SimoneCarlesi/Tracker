@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.perigea.tracker.timesheet.dto.AnagraficaClienteDto;
 import com.perigea.tracker.timesheet.dto.GenericWrapperResponse;
 import com.perigea.tracker.timesheet.dto.UtenteDto;
-import com.perigea.tracker.timesheet.service.ClientService;
+import com.perigea.tracker.timesheet.service.ClienteService;
 
 @RestController
-public class ClientController {
+public class ClienteController {
 
 	@Autowired
-	private ClientService commessaService;
+	private ClienteService commessaService;
 	
 	@PostMapping(value = "/create-anagrafica-cliente")
 	public ResponseEntity <GenericWrapperResponse<AnagraficaClienteDto>> createUser(@RequestBody AnagraficaClienteDto dtoParam) {
